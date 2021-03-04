@@ -14,13 +14,19 @@ class SpiceServer < Formula
   depends_on "glib"
   depends_on "pixman"
   depends_on "openssl@1.1"
+  depends_on "opus"
   depends_on "spice-protocol"
 
   def install
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@1.1"].opt_lib/"pkgconfig"
     system "autoreconf"
-    system "./configure", "--prefix=#{prefix}", "--disable-opus"
+    system "./configure", "--prefix=#{prefix}"
     system "make", "install"
+  end
+
+  patch do
+    url "https://raw.githubusercontent.com/brad-x/homebrew-custom/main/patches/spice-server/red-worker.patch"
+    sha256 "c1f1b3e1453ff77fdbff8775f7cfdbc08928498b8c1f43c9d160a7bf496f6530"
   end
 
   test do
