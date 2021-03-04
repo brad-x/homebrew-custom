@@ -1,5 +1,5 @@
---- server/red-stream.c
-+++ #<buffer red-stream.c>
+--- spice-0.14.3/server/red-stream.c.orig
++++ spice-0.14.3/server/red-stream.c
 @@ -384,10 +384,38 @@
          memcpy(CMSG_DATA(cmsg), &fd, fd_size);
      }

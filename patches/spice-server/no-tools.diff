@@ -1,5 +1,5 @@
---- meson.build
-+++ #<buffer spice-0.14.3/meson.build>
+--- spice-0.14.3/meson.build.orig
++++ spice-0.14.3/meson.build
 @@ -194,7 +194,6 @@
  # Subdirectories
  #

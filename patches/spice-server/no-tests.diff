@@ -1,5 +1,5 @@
---- server/meson.build
-+++ #<buffer server/meson.build>
+--- spice-0.14.3/server/meson.build.orig
++++ spice-0.14.3/server/meson.build
 @@ -186,5 +186,3 @@
  
  spice_server_shared_lib = spice_server_libs.get_shared_lib()

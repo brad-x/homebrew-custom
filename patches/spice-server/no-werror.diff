@@ -1,5 +1,5 @@
---- subprojects/spice-common/meson.build
-+++ #<buffer spice-common/meson.build>
+--- spice-0.14.3/subprojects/spice-common/meson.build.orig
++++ spice-0.14.3/subprojects/spice-common/meson.build
 @@ -13,7 +13,6 @@
  spice_common_global_cflags = ['-DG_LOG_DOMAIN="Spice"',
                                '-Wall',

@@ -1,5 +1,5 @@
---- server/red-worker.c
-+++ #<buffer red-worker.c>
+--- spice-0.14.3/server/red-worker.c.orig
++++ spice-0.14.3/server/red-worker.c
 @@ -1159,7 +1159,9 @@
  #ifndef _WIN32
      pthread_sigmask(SIG_SETMASK, &curr_sig_mask, NULL);

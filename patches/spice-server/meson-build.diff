@@ -1,5 +1,5 @@
---- meson.build
-+++ #<buffer meson.build>
+--- spice-0.14.3/meson.build.orig
++++ spice-0.14.3/meson.build
 @@ -103,9 +103,11 @@
  endforeach
  
