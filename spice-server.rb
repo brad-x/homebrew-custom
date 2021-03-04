@@ -19,7 +19,7 @@ class SpiceServer < Formula
   def install
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@1.1"].opt_lib/"pkgconfig"
     system "autoreconf"
-    system "./configure", "--prefix=#{prefix}"
+    system "./configure", "--prefix=#{prefix}", "--disable-opus"
     system "make", "install"
   end
 
