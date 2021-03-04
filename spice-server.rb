@@ -44,7 +44,7 @@ class SpiceServer < Formula
   
     mkdir "build" do
     ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python#{xy}/site-packages"
-      system "meson", *std_meson_args, "-Dwith-docs=false", "-sasl=false", ".."
+      system "meson", *std_meson_args, "-Dwith-docs=false", "-Dsasl=false", ".."
       system "ninja", "-v"
       system "ninja", "install", "-v"
     end
