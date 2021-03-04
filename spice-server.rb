@@ -1,6 +1,8 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 class SpiceServer < Formula
+  include Language::Python::Virtualenv
+
   desc "Remote virtual machine display server"
   homepage "https://www.spice-space.org/"
   url "https://www.spice-space.org/download/releases/spice-server/spice-0.14.3.tar.bz2"
@@ -10,7 +12,9 @@ class SpiceServer < Formula
   depends_on "meson" => :build
   depends_on "ninja" => :build
 
+  depends_on "gdk-pixbuf"
   depends_on "glib"
+  depends_on "gstreamer"
   depends_on "pixman"
   depends_on "openssl@1.1"
   depends_on "opus"
@@ -28,16 +32,16 @@ class SpiceServer < Formula
   end
 
   def install
-    xy = Language::Python.major_minor_version "python3"
-    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python#{xy}/site-packages"
-    resources.each do |r|
-      r.stage do
-        system "python3", *Language::Python.setup_install_args(libexec/"vendor")
-      end
-    end
+    ENV.prepend_path "PATH", Formula["python@3.9"].opt_libexec/"bin"
+
+    venv_root = libexec/"venv"
+    venv = virtualenv_create(venv_root, "python3")
+    venv.pip_install resource("six")
+    venv.pip_install resource("pyparsing")
+
+    ENV.prepend_path "PATH", "#{venv_root}/bin"
 
     mkdir "build" do
-      ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python#{xy}/site-packages"
       system "meson", *std_meson_args, "-Dwith-docs=false", ".."
       system "ninja", "-v"
       system "ninja", "install", "-v"
