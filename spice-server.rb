@@ -26,17 +26,17 @@ class SpiceServer < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/pthread-setname-args.diff"
-    sha256 "7a0dd200792d03839ca68de4e44edce45d007b6b479fcf1dbc7625b3cdeae444"
+    sha256 "ef6fb1e47bee0159e358ffb3410a758b8774229ba848594e4424de0e2b8db3d5"
   end
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-werror.diff"
-    sha256 "5927d53e7037580a54f26c01d9727057485987b8e4555402cce79bbf0f0709da"
+    sha256 "e23c80eac47b2bce684fc3d50645bf727df5d7f712cbd4d69ae758f8fc3c94a6"
   end
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-tests.diff"
-    sha256 "999c5415f1e07573b1fea95b053efb078bb44999af10a6476db13ea4eb7f4736"
+    sha256 "a2766fe736ab8630910330d6c23e3fea9890a76cd5c5cd35cdd9c67a14edf1f8"
   end
 
   test do
