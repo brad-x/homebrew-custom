@@ -34,6 +34,11 @@ class SpiceServer < Formula
     sha256 "c7407e2f4797b48ad05acc94971147ff65945ad5b2fc5d613785a3c294576e98"
   end
   
+  patch do
+    url "https://raw.githubusercontent.com/brad-x/homebrew-custom/main/patches/spice-server/no-tests-tools.patch"
+    sha256 "5a99af15d5f18775f8a9b061684074c269815d28753d5a933554cf416b062bbb"
+  end
+
   test do
     system "false"
   end
