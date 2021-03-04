@@ -16,6 +16,7 @@ class SpiceServer < Formula
   depends_on "glib"
   depends_on "gstreamer"
   depends_on "gst-plugins-base"
+  depends_on "lz4"
   depends_on "pixman"
   depends_on "openssl@1.1"
   depends_on "opus"
