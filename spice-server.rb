@@ -36,10 +36,8 @@ class SpiceServer < Formula
       end
     end
 
-    # Install in our prefix, not the first-in-the-path python site-packages dir.
-    ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python#{xy}/site-packages"
-
     mkdir "build" do
+      ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python#{xy}/site-packages"
       system "meson", *std_meson_args, "-Dwith-docs=false", ".."
       system "ninja", "-v"
       system "ninja", "install", "-v"
