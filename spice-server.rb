@@ -1,7 +1,7 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-class Spice0143TarBz < Formula
+class SpiceServer < Formula
   desc ""
   homepage ""
   url "https://www.spice-space.org/download/releases/spice-server/spice-0.14.3.tar.bz2"
