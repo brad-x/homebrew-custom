@@ -14,6 +14,7 @@ class SpiceServer < Formula
   depends_on "pixman"
   depends_on "openssl@1.1"
   depends_on "opus"
+  depends_on "python@3.9"
   depends_on "spice-protocol"
 
   resource "six" do
