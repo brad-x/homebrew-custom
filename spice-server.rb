@@ -7,6 +7,11 @@ class SpiceServer < Formula
   sha256 "551d4be4a07667cf0543f3c895beb6da8a93ef5a9829f2ae47817be5e616a114"
   license ""
 
+  depends_on "autoconf" => :build
+  depends_on "autogen" => :build
+  depends_on "automake" => :build
+
+  depends_on "spice-protocol"
 
   def install
     system "./configure", "--prefix=#{prefix}"
