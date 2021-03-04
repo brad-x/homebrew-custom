@@ -12,9 +12,12 @@ class SpiceServer < Formula
   depends_on "automake" => :build
 
   depends_on "glib"
+  depends_on "pixman"
+  depends_on "openssl@1.1"
   depends_on "spice-protocol"
 
   def install
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@1.1"].opt_lib/"pkgconfig"
     system "autoreconf"
     system "./configure", "--prefix=#{prefix}"
     system "make", "install"
