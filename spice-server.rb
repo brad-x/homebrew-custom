@@ -29,6 +29,10 @@ class SpiceServer < Formula
     sha256 "67e3c7cf21249991cf3f9f6ba136bc90a11ce7dbff678764eb17b6b2bac9ffd7"
   end
 
+  patch do
+    url "https://raw.githubusercontent.com/brad-x/homebrew-custom/main/patches/spice-server/test-websocket.patch"
+    sha256 "c7407e2f4797b48ad05acc94971147ff65945ad5b2fc5d613785a3c294576e98"
+
   test do
     system "false"
   end
