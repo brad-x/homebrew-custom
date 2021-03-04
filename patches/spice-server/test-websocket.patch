@@ -1,0 +1,19 @@
+--- spice-0.14.3/server/tests/test-websocket.c.orig	2021-03-03 21:52:43.000000000 -0500
++++ spice-0.14.3/server/tests/test-websocket.c	2021-03-03 21:52:06.000000000 -0500
+@@ -198,10 +198,14 @@
+     if (non_blocking) {
+         red_socket_set_non_blocking(new_sock, true);
+     }
+-
++#if !defined(__APPLE__)
+     int enable = 1;
+     setsockopt(new_sock, SOL_TCP, TCP_NODELAY, (const void *) &enable, sizeof(enable));
+-
++#endif
++#if defined(__APPLE__)
++    int val = !!enable;
++    setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, (const void *) &val, sizeof(val));
++#endif
+     // wait header
+     wait_for(new_sock, POLLIN);
+ 
