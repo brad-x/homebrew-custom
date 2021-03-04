@@ -5,7 +5,7 @@ class SpiceServer < Formula
   desc ""
   homepage ""
   url "https://www.spice-space.org/download/releases/spice-server/spice-0.14.3.tar.bz2"
-  sha256 "3eb71727b0006052c129e2af55ae552d1ca61cc6670fd45a65cfe1514a35259c"
+  sha256 "551d4be4a07667cf0543f3c895beb6da8a93ef5a9829f2ae47817be5e616a114"
   license ""
 
   # depends_on "cmake" => :build
