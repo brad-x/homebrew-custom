@@ -1,5 +1,5 @@
---- server/red-worker.c.orig	2021-03-03 21:27:54.000000000 -0500
-+++ server/red-worker.c	2021-03-03 21:29:09.000000000 -0500
+--- spice-0.14.3/server/red-worker.c.orig	2021-03-03 21:27:54.000000000 -0500
++++ spice-0.14.3/server/red-worker.c	2021-03-03 21:29:09.000000000 -0500
 @@ -1120,6 +1120,11 @@
      RedWorker *worker = arg;
  

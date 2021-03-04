@@ -26,7 +26,7 @@ class SpiceServer < Formula
 
   patch do
     url "https://raw.githubusercontent.com/brad-x/homebrew-custom/main/patches/spice-server/red-worker.patch"
-    sha256 "aabf3477c258e388d094f2ece25864b175bd9dd11067258ee6d81636ecdd79e5"
+    sha256 "67e3c7cf21249991cf3f9f6ba136bc90a11ce7dbff678764eb17b6b2bac9ffd7"
   end
 
   test do
