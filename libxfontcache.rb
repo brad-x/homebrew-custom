@@ -13,6 +13,7 @@ class Libxfontcache < Formula
 
   depends_on "libxext"
   depends_on "xorgproto"
+  depends_on "fontcacheproto"
 
   def install
     args = %W[
