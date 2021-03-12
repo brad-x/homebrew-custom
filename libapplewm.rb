@@ -15,7 +15,7 @@ class Libapplewm < Formula
   depends_on "xorgproto"
 
   def install
-    ENV.prepend "CPPFLAGS", "-F/System/Library/Frameworks/ApplicationServices.framework/Frameworks"
+    ENV.prepend "CPPFLAGS", "-F#{MacOS.sdk_path}/System/Library/Frameworks/ApplicationServices.framework/Headers/"
     args = %W[
       --prefix=#{prefix}
       --sysconfdir=#{etc}
