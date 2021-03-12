@@ -9,7 +9,7 @@ class Tradcpp < Formula
 
   def install
     system "bsdmake"
-    system "bsdmake", "install", "BINDIR=#{bin}", "MANDIR=#{man}",
+    system "bsdmake", "install", "BINDIR=#{bin}", "MANDIR=/usr/share/man",
                                  "CATDIR=#{man}/cat1"
   end
 
