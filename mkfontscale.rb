@@ -12,6 +12,7 @@ class Mkfontscale < Formula
   depends_on "util-macros" => :build
 
   depends_on "xorgproto"
+  depends_on "freetype"
   depends_on "bzip2"
   depends_on "zlib"
   depends_on "libfontenc"
