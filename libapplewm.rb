@@ -15,6 +15,7 @@ class Libapplewm < Formula
   depends_on "xorgproto"
 
   def install
+    ENV.prepend "CPPFLAGS", "-F/System/Library/Frameworks/ApplicationServices.framework/Frameworks"
     args = %W[
       --prefix=#{prefix}
       --sysconfdir=#{etc}
