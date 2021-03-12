@@ -5,6 +5,12 @@ class Xauth < Formula
   sha256 "e9fce796c8c5c9368594b9e8bbba237fb54b6615f5fd60e8d0a5b3c52a92c5ef"
   license ""
 
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
+  depends_on "pkg-config" => [:build, :test]
+  depends_on "util-macros" => :build
+
   depends_on "libxext"
   depends_on "libxmu"
 
