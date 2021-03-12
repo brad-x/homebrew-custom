@@ -17,7 +17,7 @@ class Xauth < Formula
       --disable-silent-rules
     ]
 
-    system "autoreconf", "-fvi"
+    system "autoconf"
     system "./configure", *args
     system "make", "install"
   end
