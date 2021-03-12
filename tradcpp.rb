@@ -8,6 +8,7 @@ class Tradcpp < Formula
   depends_on "bsdmake" => :build
 
   def install
+    system "bsdmake"
     system "bsdmake", "install"
   end
 
