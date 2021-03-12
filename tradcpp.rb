@@ -8,8 +8,10 @@ class Tradcpp < Formula
   depends_on "bsdmake" => :build
 
   def install
+    BINDIR=${prefix}/bin MANDIR=${prefix}/share/man/man
     system "bsdmake"
-    system "bsdmake", "install"
+    system "bsdmake", "install", "BINDIR=#{bin}", "MANDIR=#{man1}",
+                                 "CATDIR=#{man}/cat1"
   end
 
 end
