@@ -18,7 +18,6 @@ class Fontcacheproto < Formula
       --disable-silent-rules
     ]
 
-    system "autoconf"
     system "./configure", *args
     system "make", "install"
   end
