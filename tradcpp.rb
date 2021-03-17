@@ -8,9 +8,9 @@ class Tradcpp < Formula
   depends_on "bsdmake" => :build
 
   def install
+    man.mkpath
     system "bsdmake"
-    system "bsdmake", "install", "BINDIR=#{bin}", "MAN1DIR=#{man1}",
-                                 "CATDIR=#{man}/cat1"
+    bin.install "tradcpp"
   end
 
 end
