@@ -21,7 +21,7 @@ class QuartzWm < Formula
       --with-launchdaemons-dir=#{prefix}
   ]
 
-  system "autoreconf", "-fvi"
+  system "autoconf"
   system "./configure", *args
   system "make", "install"
   end
