@@ -5,6 +5,9 @@ class QuartzWm < Formula
   sha256 "3a4ff60ef53e7a37af2c7af3431aa0256a161807cce2161863c0657a5de2d1f5"
   license "NOASSERTION"
 
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :builds
   depends_on "pkg-config" => :build
   depends_on "util-macros" => :build
 
