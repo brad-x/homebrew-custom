@@ -32,5 +32,9 @@ class XorgServer < Formula
       --with-launchagents-dir=#{prefix} \
       --with-launchdaemons-dir=#{prefix}
   ]
+
+  system "autoreconf", "-fvi"
+  system "./configure", *args
+  system "make", "install"
   end
 end
