@@ -16,7 +16,7 @@ class Xinit < Formula
   depends_on "xrdb"
 
   def install
-    ENV.prepend "CPPFLAGS", "-F#{MacOS.sdk_path}/System/Library/Frameworks/ApplicationServices.framework/Frameworks/"
+    ENV.prepend "CPPFLAGS", "-I#{MacOS.sdk_path}/usr/include"
     args = %W[
       --prefix=#{prefix}
       --sysconfdir=#{etc}
@@ -24,6 +24,7 @@ class Xinit < Formula
       --with-launchd-id-prefix=com.brad-x
       --disable-dependency-tracking
       --disable-silent-rules
+      RAWCPP=/opt/homebrew/x86_64/opt/tradcpp/bin/tradcpp
     ]
 
     system "autoreconf", "-fvi"
