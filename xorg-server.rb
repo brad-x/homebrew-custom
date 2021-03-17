@@ -5,10 +5,10 @@ class XorgServer < Formula
   sha256 "02f2198608b6191b7f8c65158bd4613734ec1c5c3d6784c5177f41b5cd2d30a3"
   license ""
 
-  depends_on "pkg-config" :build
-  depends_on "mesa" :build
-  depends_on "xorgproto" :build
-  depends_on "xtrans" :build
+  depends_on "pkg-config" => :build
+  depends_on "mesa" => :build
+  depends_on "xorgproto" => :build
+  depends_on "xtrans" => :build
 
   depends_on "xinit"
   depends_on "quartz-wm"
