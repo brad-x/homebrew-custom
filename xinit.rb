@@ -22,6 +22,9 @@ class Xinit < Formula
       --sysconfdir=#{etc}
       --localstatedir=#{var}
       --with-launchd-id-prefix=com.brad-x
+      --with-launchagents-dir=#{prefix}
+      --with-launchdaemons-dir=#{prefix}
+
       --disable-dependency-tracking
       --disable-silent-rules
       RAWCPP=/opt/homebrew/x86_64/opt/tradcpp/bin/tradcpp
