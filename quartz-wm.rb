@@ -20,6 +20,7 @@ class QuartzWm < Formula
   def install
     args = %W[
       --with-bundle-id-prefix=com.brad-x \
+      --build=x86_64-apple-darwin20.3.0
   ]
 
   system "autoconf"
