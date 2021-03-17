@@ -2,7 +2,7 @@ class XorgServer < Formula
   desc "X.Org Server"
   homepage "https://www.x.org"
   url "https://www.x.org/archive/individual/xserver/xorg-server-1.20.10.tar.gz"
-  sha256 "02f2198608b6191b7f8c65158bd4613734ec1c5c3d6784c5177f41b5cd2d30a3"
+  sha256 "f66debdc8b7f1091dbfd3719ea7b80888b5d6bf4eb68ae34a94a1980356cfec3"
   license ""
 
   depends_on "pkg-config" => :build
