@@ -20,8 +20,6 @@ class QuartzWm < Formula
   def install
     args = %W[
       --with-bundle-id-prefix=com.brad-x \
-      --with-launchagents-dir=#{prefix} \
-      --with-launchdaemons-dir=#{prefix}
   ]
 
   system "autoconf"
