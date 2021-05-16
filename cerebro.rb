@@ -10,8 +10,8 @@ class Cerebro < Formula
   def install
     rm_f Dir["bin/*.bat"]
     bin.install Dir[bin/"*"]
-    lib.install "conf", Dir[lib/"*"]
-    (etc/"cerebro").install Dir[lib/"conf/*"]
+    (etc/"cerebro").install "conf"
+    lib.install Dir[lib/"*"]
     (lib/"conf").rmtree
     bin.install "bin/cerebro"
   end
