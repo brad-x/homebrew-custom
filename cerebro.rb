@@ -12,7 +12,6 @@ class Cerebro < Formula
     bin.install Dir[bin/"*"]
     (etc/"cerebro").install "conf"
     lib.install Dir[lib/"*"]
-    (lib/"conf").rmtree
     bin.install "bin/cerebro"
   end
 end
