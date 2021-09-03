@@ -1,16 +1,17 @@
 class Qemu < Formula
   desc "Emulator for x86 and PowerPC"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-5.2.0.tar.xz"
-  sha256 "cb18d889b628fbe637672b0326789d9b0e3b8027e0445b936537c78549df17bc"
+  url "https://download.qemu.org/qemu-6.1.0.tar.xz"
+  sha256 "eebc089db3414bbeedf1e464beda0a7515aad30f73261abc246c9b27503a3c96"
   license "GPL-2.0-only"
   head "https://git.qemu.org/git/qemu.git"
 
   bottle do
-    sha256 arm64_big_sur: "87f301721d69b60e9088e4c60da5c905f887cbc504f31185ae663bfa36a11291"
-    sha256 big_sur:       "a9d19e88aaaa1cbca0069e298f09b738b8a0a27157ce893ac322f3d6a24519bc"
-    sha256 catalina:      "2443538eb765864a43207708b0f2eb80a601c4755952c9f3d9c7c85e1b07f2da"
-    sha256 mojave:        "359f0bc3b9f605758f3e34819a69c310f855e8b7ddc5ba45c2f3f4c8cf884f19"
+    sha256 arm64_big_sur: "09773cd9881a40b27ad2599eb869443c04f9b1bb5cbbf741c2b562c188e8a6b3"
+    sha256 big_sur:       "13387458a7dda4c91fadd9274968f0d496171708fc950d4161a32a4d5c6a2a7c"
+    sha256 catalina:      "aaef3209e70171353a841992ffffb28a73e65a8762041cb23b0363bd3dc4ad07"
+    sha256 mojave:        "b611de8493acf94662ec19df3bea1bec9acad6215baca6d0e485efa32e99dacf"
+    sha256 x86_64_linux:  "0257fe7bf5ad82ff9f2cbc5d6dc111e315db5cb5f84b6d9dd9c3aee29bd777ed"
   end
 
   depends_on "libtool" => :build
@@ -22,6 +23,7 @@ class Qemu < Formula
   depends_on "gnutls"
   depends_on "jpeg"
   depends_on "libpng"
+  depends_on "libslirp"
   depends_on "libssh"
   depends_on "libusb"
   depends_on "lzo"
@@ -33,22 +35,16 @@ class Qemu < Formula
   depends_on "spice-protocol"
   depends_on "spice-server"
 
+  on_linux do
+    depends_on "gcc"
+  end
+
+  fails_with gcc: "5"
+
   # 820KB floppy disk image file of FreeDOS 1.2, used to test QEMU
   resource "test-image" do
     url "https://dl.bintray.com/homebrew/mirror/FD12FLOPPY.zip"
     sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
-  end
-
-  # remove in next release
-  patch do
-    url "https://git.qemu.org/?p=qemu.git;a=patch;h=0dbce6efb5ff2e7113734d3a0cabbf87fc56feec"
-    sha256 "8ced33c7f829216544b762d8db0f143dbea04fa5a1ce41b491bbd7808f64a944"
-  end
-
-  # remove in next release
-  patch do
-    url "https://git.qemu.org/?p=qemu.git;a=patch;h=cb7abd8319d19000b57ae6c5c474c2635db054c6"
-    sha256 "818ad42f0cb25ab5df37058e27d7f879e4389489f692da4404c1f15dde5b2c4d"
   end
 
   def install
@@ -62,6 +58,7 @@ class Qemu < Formula
       --disable-guest-agent
       --enable-curses
       --enable-libssh
+      --enable-slirp=system
       --enable-vde
       --extra-cflags=-DNCURSES_WIDECHAR=1
       --disable-sdl
@@ -97,7 +94,6 @@ class Qemu < Formula
     assert_match expected, shell_output("#{bin}/qemu-system-mips64 --version")
     assert_match expected, shell_output("#{bin}/qemu-system-mips64el --version")
     assert_match expected, shell_output("#{bin}/qemu-system-mipsel --version")
-    assert_match expected, shell_output("#{bin}/qemu-system-moxie --version")
     assert_match expected, shell_output("#{bin}/qemu-system-nios2 --version")
     assert_match expected, shell_output("#{bin}/qemu-system-or1k --version")
     assert_match expected, shell_output("#{bin}/qemu-system-ppc --version")
