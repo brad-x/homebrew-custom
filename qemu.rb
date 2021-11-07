@@ -4,15 +4,8 @@ class Qemu < Formula
   url "https://download.qemu.org/qemu-6.1.0.tar.xz"
   sha256 "eebc089db3414bbeedf1e464beda0a7515aad30f73261abc246c9b27503a3c96"
   license "GPL-2.0-only"
-  head "https://git.qemu.org/git/qemu.git"
-
-  bottle do
-    sha256 arm64_big_sur: "09773cd9881a40b27ad2599eb869443c04f9b1bb5cbbf741c2b562c188e8a6b3"
-    sha256 big_sur:       "13387458a7dda4c91fadd9274968f0d496171708fc950d4161a32a4d5c6a2a7c"
-    sha256 catalina:      "aaef3209e70171353a841992ffffb28a73e65a8762041cb23b0363bd3dc4ad07"
-    sha256 mojave:        "b611de8493acf94662ec19df3bea1bec9acad6215baca6d0e485efa32e99dacf"
-    sha256 x86_64_linux:  "0257fe7bf5ad82ff9f2cbc5d6dc111e315db5cb5f84b6d9dd9c3aee29bd777ed"
-  end
+  revision 1
+  head "https://git.qemu.org/git/qemu.git", branch: "master"
 
   depends_on "libtool" => :build
   depends_on "meson" => :build
@@ -31,7 +24,7 @@ class Qemu < Formula
   depends_on "nettle"
   depends_on "pixman"
   depends_on "snappy"
-  depends_on "vde"
+  depends_on "brad-x/custom/vde"
   depends_on "spice-protocol"
   depends_on "spice-server"
 
@@ -45,6 +38,13 @@ class Qemu < Formula
   resource "test-image" do
     url "https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/FD12FLOPPY.zip"
     sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
+  end
+
+  if Hardware::CPU.arm?
+    patch do
+      url "https://patchwork.kernel.org/series/548227/mbox/"
+      sha256 "5b9c9779374839ce6ade1b60d1377c3fc118bc43e8482d0d3efa64383e11b6d3"
+    end
   end
 
   def install
@@ -71,9 +71,7 @@ class Qemu < Formula
     # Samba installations from external taps.
     args << "--smbd=#{HOMEBREW_PREFIX}/sbin/samba-dot-org-smbd"
 
-    on_macos do
-      args << "--enable-cocoa"
-    end
+    args << "--enable-cocoa" if OS.mac?
 
     system "./configure", *args
     system "make", "V=1", "install"
