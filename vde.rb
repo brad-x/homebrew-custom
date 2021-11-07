@@ -7,6 +7,9 @@ class Vde < Formula
   license "GPL-2.0"
   revision 1
 
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+
   livecheck do
     url :stable
     regex(%r{url=.*?/vde\d*?[._-]v?(\d+(?:\.\d+)+)\.t}i)
