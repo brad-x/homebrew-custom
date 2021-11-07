@@ -9,7 +9,8 @@ class Vde < Formula
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
-
+  depends_on "libtool" => :build
+  
   livecheck do
     url :stable
     regex(%r{url=.*?/vde\d*?[._-]v?(\d+(?:\.\d+)+)\.t}i)
