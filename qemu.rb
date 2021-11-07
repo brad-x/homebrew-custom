@@ -25,8 +25,6 @@ class Qemu < Formula
   depends_on "pixman"
   depends_on "snappy"
   depends_on "brad-x/custom/vde"
-  depends_on "spice-protocol"
-  depends_on "spice-server"
 
   on_linux do
     depends_on "gcc"
