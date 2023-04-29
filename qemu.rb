@@ -1,4 +1,3 @@
-cat /opt/homebrew/Library/Taps/homebrew/homebrew-core/Formula/qemu.rb
 class Qemu < Formula
   desc "Emulator for x86 and PowerPC"
   homepage "https://www.qemu.org/"
