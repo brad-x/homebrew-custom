@@ -39,12 +39,12 @@ class QemuUtm < Formula
   # 820KB floppy disk image file of FreeDOS 1.2, used to test QEMU
   resource "homebrew-test-image" do
     url "https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/official/FD12FLOPPY.zip"
-    sha256 "f582a1c4256c39e1335849050100aa362b566def9fa9d3724392be8481e8d9c9"
+    sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
   end
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-utm.diff"
-    sha256 "866fd2631f5c463d342dd908072b2e98922da015af8f1be9818fc1e332b50df2"
+    sha256 "f582a1c4256c39e1335849050100aa362b566def9fa9d3724392be8481e8d9c9"
   end
 
   def install
