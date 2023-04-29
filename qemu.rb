@@ -6,16 +6,6 @@ class Qemu < Formula
   license "GPL-2.0-only"
   head "https://git.qemu.org/git/qemu.git", branch: "master"
 
-  bottle do
-    sha256 arm64_ventura:  "fa987f9dc770812c58333c910cb0f5c4e730d513a1568cc4d6a215dfa3ac82d1"
-    sha256 arm64_monterey: "62bea721ff6fa3ee15ed53ee8215fea42b2cd07e8fb39b77ce8e39f30287576f"
-    sha256 arm64_big_sur:  "9b2c3aa359719358370901d00a1b9323459ec9af3add371d212fd98071418e6b"
-    sha256 ventura:        "b4ae1b25edf4276936ad69d9399cf117a28cd49e212b0467c4cb6c22a7074f86"
-    sha256 monterey:       "6a32684edc7ed07358a8b9b602198d69a45902ec7c72230caf5c9b9b8b5e7f10"
-    sha256 big_sur:        "c327dffc16102993ab7fb81a2bbad0035af6af3e550a4095db72fcb8aff56ae8"
-    sha256 x86_64_linux:   "05ece9acbbb003a7e8035f18f5193ae7c9caffacd60a744eac629de4a545aea4"
-  end
-
   depends_on "libtool" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build
