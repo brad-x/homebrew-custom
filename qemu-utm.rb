@@ -1,10 +1,10 @@
 class QemuUtm < Formula
   desc "Emulator for x86 and PowerPC with UTM patchset"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-7.2.0.tar.xz"
-  sha256 "5b49ce2687744dad494ae90a898c52204a3406e84d072482a1e1be854eeb2157"
+  url "https://github.com/utmapp/qemu/releases/download/v8.0.0-utm/qemu-8.0.0-utm.tar.bz2"
+  sha256 "42ad99f6b42b5e38fcde7c422aaac7609778ab5b7f540e23da12df11db2c0a1a"
   license "GPL-2.0-only"
-  head "https://git.qemu.org/git/qemu.git", branch: "master"
+  head "https://github.com/utmapp/qemu.git", branch: "utm-edition"
 
   depends_on "libtool" => :build
   depends_on "meson" => :build
@@ -44,7 +44,7 @@ class QemuUtm < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-utm.diff"
-    sha256 "f582a1c4256c39e1335849050100aa362b566def9fa9d3724392be8481e8d9c9"
+    sha256 "43ea021e9b47210b013bd7924a77d43520fad9672f6d369d7e425f643c8225d1"
   end
 
   def install
