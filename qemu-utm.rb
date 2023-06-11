@@ -47,6 +47,13 @@ class QemuUtm < Formula
     sha256 "43ea021e9b47210b013bd7924a77d43520fad9672f6d369d7e425f643c8225d1"
   end
 
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-utm-xcode-broken-subcll.diff"
+    sha256 "02259823d414c6a645aa42f6a8ebe5a30a92fc6a06d596927e3680aecae8d596"
+  end
+
+  
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 

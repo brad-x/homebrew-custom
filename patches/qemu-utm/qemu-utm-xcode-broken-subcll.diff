@@ -1,0 +1,12 @@
+diff -ru qemu-8.0.0-utm/include/qemu/host-utils.h qemu-8.0.0-utm-xcodebroke/include/qemu/host-utils.h
+--- qemu-8.0.0-utm/include/qemu/host-utils.h	2023-04-30 23:16:02.000000000 -0400
++++ qemu-8.0.0-utm-xcodebroke/include/qemu/host-utils.h	2023-06-11 17:45:56.893229277 -0400
+@@ -595,7 +595,7 @@
+  */
+ static inline uint64_t usub64_borrow(uint64_t x, uint64_t y, bool *pborrow)
+ {
+-#if __has_builtin(__builtin_subcll)
++#if 0
+     unsigned long long b = *pborrow;
+     x = __builtin_subcll(x, y, b, &b);
+     *pborrow = b & 1;
