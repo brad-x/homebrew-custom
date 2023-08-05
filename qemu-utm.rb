@@ -44,7 +44,7 @@ class QemuUtm < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-utm.diff"
-    sha256 "2ba30e9363bb368f0bcebbfb88b70bb76053ae0e8446e1c3f2d1d70f1c0f16b3"
+    sha256 "b057d59008db64282838b78a0acde0a1e541d7e196dc4b41e1d9318ee1d0e8b0"
   end
 
   def install
