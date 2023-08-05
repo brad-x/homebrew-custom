@@ -1,8 +1,8 @@
 class QemuUtm < Formula
   desc "Emulator for x86 and PowerPC with UTM patchset"
   homepage "https://www.qemu.org/"
-  url "https://github.com/utmapp/qemu/releases/download/v8.0.2-utm/qemu-8.0.2-utm.tar.bz2"
-  sha256 "d12dab87e60c2f4bb7b6f39fc2af24a5d3d6cbdeac022553ae08e9cee2384baf"
+  url "https://github.com/utmapp/qemu/releases/download/v7.2.0-utm/qemu-7.2.0-utm.tar.bz2"
+  sha256 "a972322e476b4cd56319e5e49496e4ec653f226fcbd0b2b4dc38573b8fe776d2"
   license "GPL-2.0-only"
   head "https://github.com/utmapp/qemu.git", branch: "utm-edition"
 
