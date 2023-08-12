@@ -1,7 +1,7 @@
 class Libangle < Formula
   desc "Conformant OpenGL ES implementation for Windows, Mac, Linux, iOS and Android"
   homepage "https://github.com/google/angle"
-  url "https://github.com/google/angle.git", using: :git, revision: "df0f7133799ca6aa0d31802b22d919c6197051cf"
+  url "https://github.com/google/angle.git", using: :git, revision: "13630ff5d3afef80ea50c3bc67b3ab95887220fe"
   version "20211212.1"
   license "BSD-3-Clause"
 
