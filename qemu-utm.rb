@@ -28,6 +28,10 @@ class QemuUtm < Formula
   depends_on "vde"
   depends_on "zstd"
 
+  depends_on "brad-x/custom/libangle"
+  depends_on "brad-x/custom/libepoxy-angle"
+  depends_on "brad-x/custom/virglrenderer"
+
   on_linux do
     depends_on "attr"
     depends_on "gtk+3"
