@@ -9,7 +9,7 @@ class Libangle < Formula
   depends_on "ninja" => :build
 
   resource "depot_tools" do
-    url "https://chromium.googlesource.com/chromium/tools/depot_tools.git", revision: "main"
+    url "https://chromium.googlesource.com/chromium/tools/depot_tools.git", revision: "5da65ec20db9b17b03420d928240092e5955a769"
   end
 
   def install
@@ -18,21 +18,33 @@ class Libangle < Formula
         path = PATH.new(ENV["PATH"], Dir.pwd)
         with_env(PATH: path) do
           Dir.chdir(buildpath)
+          ENV["DEPOT_TOOLS_UPDATE"] = "0"
 
-          system "python3", "scripts/bootstrap.py"
-          system "gclient", "sync"
-          if Hardware::CPU.arm?
-            system "gn", "gen", \
-              "--args=use_custom_libcxx=false target_cpu=\"arm64\" treat_warnings_as_errors=false", \
-              "./angle_build"
-          else
-            system "gn", "gen", "--args=use_custom_libcxx=false treat_warnings_as_errors=false", "./angle_build"
-          end
+          # We run this rather than scripts/bootstrap.py
+          # so that we can set the cache-dir since depot-tools pulls in a lot!
+          system "gclient", "config",
+                 "--name", "change2dot",
+                 "--unmanaged",
+                 "--cache-dir", "#{HOMEBREW_CACHE}/gclient_cache",
+                 "-j", ENV.make_jobs,
+                 "https://chromium.googlesource.com/angle/angle.git"
+          content = File.read(".gclient")
+          content = content.gsub(/change2dot/, ".")
+          content += "target_os = [ 'android' ]"
+          File.open(".gclient", "w") { |file| file.puts content }
+          system "gclient", "sync", "-j", ENV.make_jobs
+
+          # This fixes relocation failing with HeaderPadError in
+          # replace_command in macho_file.rb
+          system "sed", "-i", "-e", "1228i\\
+          \"-Wl,-headerpad_max_install_names\",
+          ", "BUILD.gn"
+          system "gn", "gen", \
+                 "--args=is_debug=false", \
+                 "./angle_build"
           system "ninja", "-C", "angle_build"
-          lib.install "angle_build/libabsl.dylib"
           lib.install "angle_build/libEGL.dylib"
           lib.install "angle_build/libGLESv2.dylib"
-          lib.install "angle_build/libchrome_zlib.dylib"
           include.install Pathname.glob("include/*")
         end
       end
