@@ -50,35 +50,35 @@ class SpiceServer < Formula
     end
   end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/pthread-setname-args.diff"
-    sha256 "ef6fb1e47bee0159e358ffb3410a758b8774229ba848594e4424de0e2b8db3d5"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/pthread-setname-args.diff"
+  #   sha256 "ef6fb1e47bee0159e358ffb3410a758b8774229ba848594e4424de0e2b8db3d5"
+  # end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-werror.diff"
-    sha256 "e23c80eac47b2bce684fc3d50645bf727df5d7f712cbd4d69ae758f8fc3c94a6"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-werror.diff"
+  #   sha256 "e23c80eac47b2bce684fc3d50645bf727df5d7f712cbd4d69ae758f8fc3c94a6"
+  # end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-tests.diff"
-    sha256 "a2766fe736ab8630910330d6c23e3fea9890a76cd5c5cd35cdd9c67a14edf1f8"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-tests.diff"
+  #   sha256 "a2766fe736ab8630910330d6c23e3fea9890a76cd5c5cd35cdd9c67a14edf1f8"
+  # end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-tools.diff"
-    sha256 "6b44d51804ae8831a69afea1e60aaa59a7ad44e45444905c21c79e961f006382"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-tools.diff"
+  #   sha256 "6b44d51804ae8831a69afea1e60aaa59a7ad44e45444905c21c79e961f006382"
+  # end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-msg-nosignal.diff"
-    sha256 "1ad43db73cdf9bf7d890e07311b4df6f9b95cb987dbea7b7e3526f3a8ccd6497"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/no-msg-nosignal.diff"
+  #   sha256 "1ad43db73cdf9bf7d890e07311b4df6f9b95cb987dbea7b7e3526f3a8ccd6497"
+  # end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/meson-build.diff"
-    sha256 "6157cb95abb0ed5d9769b61e5c49b2d815b1780b769f0226def5ad4e9f8eab9e"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/spice-server/meson-build.diff"
+  #   sha256 "6157cb95abb0ed5d9769b61e5c49b2d815b1780b769f0226def5ad4e9f8eab9e"
+  # end
 
   test do
     system "false"
