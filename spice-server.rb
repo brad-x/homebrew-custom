@@ -36,6 +36,7 @@ class SpiceServer < Formula
   resource "setuptools" do
     url "https://files.pythonhosted.org/packages/dc/98/5f896af066c128669229ff1aa81553ac14cfb3e5e74b6b44594132b8540e/setuptools-68.0.0.tar.gz"
     sha256 "baf1fdb41c6da4cd2eae722e135500da913332ab3f2f5c7d33af9b492acb5235"
+  end
 
   def install
     xy = Language::Python.major_minor_version "python3"
