@@ -1,8 +1,6 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 class SpiceServer < Formula
-  include Language::Python::Virtualenv
-
   desc "Remote virtual machine display server"
   homepage "https://www.spice-space.org/"
   url "https://www.spice-space.org/download/releases/spice-server/spice-0.15.2.tar.bz2"
