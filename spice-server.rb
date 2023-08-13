@@ -39,17 +39,10 @@ class SpiceServer < Formula
   end
 
   def install
-    xy = Language::Python.major_minor_version "python3"
-    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python#{xy}/site-packages"
-    resources.each do |r|
-      r.stage do
-        system "python3", *Language::Python.setup_install_args(libexec/"vendor")
-      end
-    end
+    virtualenv_install_with_resources
   
     mkdir "build" do
-    ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python#{xy}/site-packages"
-      system "meson", *std_meson_args, "-Dwith-docs=false", "-Dsasl=false", ".."
+    system "meson", *std_meson_args, "-Dwith-docs=false", "-Dsasl=false", ".."
       system "ninja", "-v"
       system "ninja", "install", "-v"
     end
