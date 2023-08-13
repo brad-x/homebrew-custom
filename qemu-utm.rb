@@ -28,7 +28,7 @@ class QemuUtm < Formula
   depends_on "vde"
   depends_on "zstd"
 
-  depends_on "brad-x/custom/spice-protocol"
+  depends_on "spice-protocol"
   # depends_on "brad-x/custom/libangle"
   # depends_on "brad-x/custom/libepoxy-angle"
   # depends_on "brad-x/custom/virglrenderer"
