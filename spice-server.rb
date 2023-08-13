@@ -5,8 +5,8 @@ class SpiceServer < Formula
 
   desc "Remote virtual machine display server"
   homepage "https://www.spice-space.org/"
-  url "https://www.spice-space.org/download/releases/spice-server/spice-0.14.3.tar.bz2"
-  sha256 "551d4be4a07667cf0543f3c895beb6da8a93ef5a9829f2ae47817be5e616a114"
+  url "https://www.spice-space.org/download/releases/spice-server/spice-0.15.2.tar.bz2"
+  sha256 "6d9eb6117f03917471c4bc10004abecff48a79fb85eb85a1c45f023377015b81"
   license "BSD"
 
   depends_on "meson" => :build
@@ -15,12 +15,12 @@ class SpiceServer < Formula
   depends_on "gdk-pixbuf"
   depends_on "glib"
   depends_on "gstreamer"
-  depends_on "gst-plugins-base"
+  # depends_on "gst-plugins-base"
   depends_on "lz4"
   depends_on "pixman"
   depends_on "openssl@1.1"
   depends_on "opus"
-  depends_on "python@3.9"
+  depends_on "python@3.11"
   depends_on "spice-protocol"
 
   resource "six" do
