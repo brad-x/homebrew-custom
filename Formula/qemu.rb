@@ -12,7 +12,7 @@ class Qemu < Formula
   depends_on "pkg-config" => :build
   depends_on "spice-protocol" => :build
 
-  depends_on "capstone"
+  # depends_on "capstone"
   depends_on "glib"
   depends_on "gnutls"
   depends_on "jpeg-turbo"
@@ -56,7 +56,7 @@ class Qemu < Formula
       --disable-bsd-user
       --disable-guest-agent
       --enable-slirp
-      --enable-capstone
+      --disable-capstone
       --enable-curses
       --enable-libssh
       --enable-vde
