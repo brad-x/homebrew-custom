@@ -47,8 +47,8 @@ class Qemu < Formula
   end
   
   patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/handle-unknown-smc.diff"
-    sha256 "533764ad321da72af33bb89980e32034708bd3bf8514eff797a18dff654c880b"
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/windows-hack.diff"
+    sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   end
 
   def install

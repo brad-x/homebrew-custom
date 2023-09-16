@@ -1,0 +1,21 @@
+--- qemu/target/arm/hvf/hvf.c	2023-09-16 01:14:11.904244115 -0400
++++ qemu-utm/target/arm/hvf/hvf.c	2023-09-16 01:22:44.901627279 -0400
+@@ -86,6 +86,8 @@
+ #define TMR_CTL_IMASK   (1 << 1)
+ #define TMR_CTL_ISTATUS (1 << 2)
+ 
++static const bool windows_workaround_enabled = true;
++
+ static void hvf_wfi(CPUState *cpu);
+ 
+ typedef struct HVFVTimer {
+@@ -1282,7 +1284,8 @@
+         break;
+     case EC_AA64_SMC:
+         cpu_synchronize_state(cpu);
+-        if (arm_cpu->psci_conduit == QEMU_PSCI_CONDUIT_SMC) {
++        if (windows_workaround_enabled ||
++            arm_cpu->psci_conduit == QEMU_PSCI_CONDUIT_SMC) {
+             advance_pc = true;
+ 
+             if (!hvf_handle_psci_call(cpu)) {
