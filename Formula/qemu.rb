@@ -45,6 +45,11 @@ class Qemu < Formula
     url "https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/official/FD12FLOPPY.zip"
     sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
   end
+  
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/handle-unknown-smc.diff"
+    sha256 "533764ad321da72af33bb89980e32034708bd3bf8514eff797a18dff654c880b"
+  end
 
   def install
     ENV["LIBTOOL"] = "glibtool"
