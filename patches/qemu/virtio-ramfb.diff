@@ -61,7 +61,7 @@ index 0000000000..d08bb90a14
 +    VirtIOGPUBase *g = vramfb->vgpu;
 +
 +    if (g->hw_ops->ui_info) {
-+        return g->hw_ops->ui_info(g, idx, info);
++        g->hw_ops->ui_info(g, idx, info);
 +    }
 +    return -1;
 +}

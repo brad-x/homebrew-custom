@@ -53,7 +53,7 @@ class Qemu < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/virtio-ramfb.diff"
-    sha256 "a49cb919a3c2ec9eaabb2fd298dfb9b2209001fe2a96cb31696927a1f880f87d"
+    sha256 "0ddeed33046845ffea600dbd7a0f7a8c6758eaf0c2d09e6449026b12d0f6b5d6"
   end
 
   def install
