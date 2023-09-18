@@ -51,6 +51,11 @@ class Qemu < Formula
     sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   end
 
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/virtio-ramfb.diff"
+    sha256 "a49cb919a3c2ec9eaabb2fd298dfb9b2209001fe2a96cb31696927a1f880f87d"
+  end
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 
