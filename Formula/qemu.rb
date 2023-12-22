@@ -56,6 +56,11 @@ class Qemu < Formula
     sha256 "0ddeed33046845ffea600dbd7a0f7a8c6758eaf0c2d09e6449026b12d0f6b5d6"
   end
 
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-virtio-vga.diff"
+    sha256 "131ab07e4fc95e6aeec65fd86ffac50898c8eadcce17c582999afdb6dfc857f3"
+  end
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 
