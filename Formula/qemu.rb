@@ -63,7 +63,7 @@ class Qemu < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-vmnet-short-frames.diff"
-    sha256 "11d9ee513c0247a15c60ee79a346da5cf8ddb2a1ed051956ce6e56370ccba92b"
+    sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
   end
 
   def install
