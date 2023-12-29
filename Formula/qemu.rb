@@ -61,6 +61,11 @@ class Qemu < Formula
     sha256 "131ab07e4fc95e6aeec65fd86ffac50898c8eadcce17c582999afdb6dfc857f3"
   end
 
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-vmnet-short-frames.diff"
+    sha256 "11d9ee513c0247a15c60ee79a346da5cf8ddb2a1ed051956ce6e56370ccba92b"
+  end
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 
