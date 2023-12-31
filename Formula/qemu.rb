@@ -68,7 +68,7 @@ class Qemu < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-cocoa-updates.diff"
-    sha256 "660fafed5760112f3cac0a13a603d08ea1ec528980ec03fdf12298df40710b8e"
+    sha256 "eac29bd71d719b2582ee4e3a1c349892b547aeca7a15a78ce8eb7e2d3a9bcb9b"
   end
 
   def install
