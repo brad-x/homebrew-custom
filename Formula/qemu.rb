@@ -71,6 +71,11 @@ class Qemu < Formula
     sha256 "eac29bd71d719b2582ee4e3a1c349892b547aeca7a15a78ce8eb7e2d3a9bcb9b"
   end
 
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-cocoa-sonoma-title-fix.diff"
+    sha256 "094ff132c84759debbd4c3c79d32117a6efd3d948251b70ad7ec300b9385e4d7"
+  end
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 

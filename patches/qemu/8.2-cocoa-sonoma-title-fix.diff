@@ -1,0 +1,13 @@
+diff --git a/ui/cocoa.m b/ui/cocoa.m
+index cd069da696..67a38ca5fa 100644
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -365,6 +365,7 @@ - (id)initWithFrame:(NSRect)frameRect
+         screen.width = frameRect.size.width;
+         screen.height = frameRect.size.height;
+         kbd = qkbd_state_init(dcl.con);
++        self.clipsToBounds = true;
+ 
+     }
+     return self;
+
