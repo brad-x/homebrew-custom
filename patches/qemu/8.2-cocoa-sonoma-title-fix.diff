@@ -6,8 +6,8 @@ index cd069da696..67a38ca5fa 100644
          screen.width = frameRect.size.width;
          screen.height = frameRect.size.height;
          kbd = qkbd_state_init(dcl.con);
-+        if #available(macOS 14, *) {
-+           self.clipsToBounds = true;
++        if (@available(macOS 14, *)) {
++            self.clipsToBounds = YES;
 +        }
 
      }
