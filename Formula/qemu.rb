@@ -73,7 +73,7 @@ class Qemu < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-cocoa-sonoma-title-fix.diff"
-    sha256 "094ff132c84759debbd4c3c79d32117a6efd3d948251b70ad7ec300b9385e4d7"
+    sha256 "cc860346f08328157380ef7c40c75ef7a0d584051a7c3fcf603e87c4446da106"
   end
 
   def install
