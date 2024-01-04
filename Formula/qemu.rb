@@ -11,8 +11,9 @@ class Qemu < Formula
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
   depends_on "spice-protocol" => :build
+  
 
-  # depends_on "capstone"
+  depends_on "capstone"
   depends_on "glib"
   depends_on "gnutls"
   depends_on "jpeg-turbo"
@@ -28,6 +29,7 @@ class Qemu < Formula
   depends_on "snappy"
   depends_on "vde"
   depends_on "zstd"
+  depends_on "spice-server"
 
   uses_from_macos "bison" => :build
   uses_from_macos "flex" => :build
@@ -86,9 +88,10 @@ class Qemu < Formula
       --disable-bsd-user
       --disable-guest-agent
       --enable-slirp
-      --disable-capstone
+      --enable-capstone
       --enable-curses
       --enable-libssh
+      --enable-spice
       --enable-vde
       --enable-virtfs
       --enable-zstd
