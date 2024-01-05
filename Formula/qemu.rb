@@ -95,6 +95,7 @@ class Qemu < Formula
       --enable-vde
       --enable-virtfs
       --enable-zstd
+      --enable-usb-redir
       --extra-cflags=-DNCURSES_WIDECHAR=1
     ]
 
