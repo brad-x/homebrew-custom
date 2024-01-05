@@ -21,6 +21,7 @@ class Qemu < Formula
   depends_on "libslirp"
   depends_on "libssh"
   depends_on "libusb"
+  depends_on "usbredir"
   depends_on "lzo"
   depends_on "ncurses"
   depends_on "nettle"
