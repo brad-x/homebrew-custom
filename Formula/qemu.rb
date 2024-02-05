@@ -60,11 +60,6 @@ class Qemu < Formula
   end
 
   patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-virtio-vga.diff"
-    sha256 "131ab07e4fc95e6aeec65fd86ffac50898c8eadcce17c582999afdb6dfc857f3"
-  end
-
-  patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-vmnet-short-frames.diff"
     sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
   end
