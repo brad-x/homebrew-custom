@@ -79,6 +79,11 @@ class Qemu < Formula
     sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
   end
 
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/fake-tpm-tis.diff"
+    sha256 "76df4a09b118152be9698fc17c0f5b7a4d868a2a6518930431b6e09f254535c6"
+  end
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 
