@@ -54,10 +54,10 @@ class Qemu < Formula
     sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/virtio-ramfb.diff"
-    sha256 "0ddeed33046845ffea600dbd7a0f7a8c6758eaf0c2d09e6449026b12d0f6b5d6"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/virtio-ramfb.diff"
+  #   sha256 "0ddeed33046845ffea600dbd7a0f7a8c6758eaf0c2d09e6449026b12d0f6b5d6"
+  # end
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-vmnet-short-frames.diff"
