@@ -50,7 +50,7 @@ class QemuUtm < Formula
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-7.2.0-utm.diff"
-    sha256 "b057d59008db64282838b78a0acde0a1e541d7e196dc4b41e1d9318ee1d0e8b0"
+    sha256 "2ba30e9363bb368f0bcebbfb88b70bb76053ae0e8446e1c3f2d1d70f1c0f16b3"
   end
 
   def install
@@ -71,7 +71,6 @@ class QemuUtm < Formula
       --enable-zstd
       --enable-spice
       --extra-cflags=-DNCURSES_WIDECHAR=1
-      --with-suffix=utm
     ]
 
     # Sharing Samba directories in QEMU requires the samba.org smbd which is
