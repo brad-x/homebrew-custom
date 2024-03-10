@@ -72,7 +72,6 @@ class QemuUtm < Formula
       --enable-spice
       --extra-cflags=-DNCURSES_WIDECHAR=1
       --with-suffix=utm
-      --enable-tcg-threaded-interpreter
     ]
 
     # Sharing Samba directories in QEMU requires the samba.org smbd which is
