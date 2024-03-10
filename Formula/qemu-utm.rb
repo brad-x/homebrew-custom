@@ -71,6 +71,8 @@ class QemuUtm < Formula
       --enable-zstd
       --enable-spice
       --extra-cflags=-DNCURSES_WIDECHAR=1
+      --with-suffix=utm
+      --enable-tcg-threaded-interpreter
     ]
 
     # Sharing Samba directories in QEMU requires the samba.org smbd which is
@@ -81,7 +83,7 @@ class QemuUtm < Formula
     args << "--smbd=#{HOMEBREW_PREFIX}/sbin/samba-dot-org-smbd"
 
     args += if OS.mac?
-      ["--disable-gtk", "--disable-cocoa", "--enable-sdl"]
+      ["--disable-gtk", "--enable-cocoa", "--enable-sdl"]
     else
       ["--enable-gtk"]
     end
