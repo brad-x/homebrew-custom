@@ -74,10 +74,10 @@ class Qemu < Formula
   #   sha256 "eac29bd71d719b2582ee4e3a1c349892b547aeca7a15a78ce8eb7e2d3a9bcb9b"
   # end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-cocoa-sonoma-title-fix.diff"
-    sha256 "eca8567f3c617d2fd42a04441a9a63c3baad9bf65289909041869848dead2eff"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-cocoa-sonoma-title-fix.diff"
+  #   sha256 "eca8567f3c617d2fd42a04441a9a63c3baad9bf65289909041869848dead2eff"
+  # end
 
   # patch do
   #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/introduce-TPM-CRB-SysBus-device-v5.diff"
