@@ -93,6 +93,8 @@ class Qemu < Formula
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/tpm-crb-aarch64.diff
     sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
+  end
+  
   def install
     ENV["LIBTOOL"] = "glibtool"
 
