@@ -69,32 +69,11 @@ class Qemu < Formula
     sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
   end
 
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-cocoa-updates.diff"
-  #   sha256 "eac29bd71d719b2582ee4e3a1c349892b547aeca7a15a78ce8eb7e2d3a9bcb9b"
-  # end
-
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-cocoa-sonoma-title-fix.diff"
-  #   sha256 "eca8567f3c617d2fd42a04441a9a63c3baad9bf65289909041869848dead2eff"
-  # end
-
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/introduce-TPM-CRB-SysBus-device-v5.diff"
-  #   sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
-  # end
-
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/fake-tpm-tis.diff"
-  #   sha256 "76df4a09b118152be9698fc17c0f5b7a4d868a2a6518930431b6e09f254535c6"
-  # end
-
-
   patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/tpm-crb-aarch64.diff
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/tpm-crb-aarch64.diff"
     sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
   end
-  
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 
