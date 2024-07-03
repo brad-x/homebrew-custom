@@ -59,20 +59,15 @@ class Qemu < Formula
     sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   end
 
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/virtio-ramfb.diff"
-  #   sha256 "0ddeed33046845ffea600dbd7a0f7a8c6758eaf0c2d09e6449026b12d0f6b5d6"
-  # end
-
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-vmnet-short-frames.diff"
     sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
   end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/tpm-crb-aarch64.diff"
-    sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/tpm-crb-aarch64.diff"
+  #   sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
+  # end
 
   def install
     ENV["LIBTOOL"] = "glibtool"
