@@ -1,8 +1,8 @@
 class Qemu < Formula
   desc "Generic machine emulator and virtualizer"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-9.0.0.tar.xz"
-  sha256 "32708ac66c30d8c892633ea968c771c1c76d597d70ddead21a0d22ccf386da69"
+  url "https://download.qemu.org/qemu-9.0.1.tar.xz"
+  sha256 "d0f4db0fbd151c0cf16f84aeb2a500f6e95009732546f44dafab8d2049bbb805"
   license "GPL-2.0-only"
   head "https://gitlab.com/qemu-project/qemu.git", branch: "master"
 
@@ -89,6 +89,10 @@ class Qemu < Formula
   #   sha256 "76df4a09b118152be9698fc17c0f5b7a4d868a2a6518930431b6e09f254535c6"
   # end
 
+
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/tpm-crb-aarch64.diff
+    sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
   def install
     ENV["LIBTOOL"] = "glibtool"
 
