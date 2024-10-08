@@ -1,4 +1,4 @@
-class QemuUtm < Formula
+class QemuUtmAT7 < Formula
   desc "Emulator for x86 and PowerPC with UTM patchset"
   homepage "https://www.qemu.org/"
   url "https://github.com/utmapp/qemu/releases/download/v7.2.0-utm/qemu-7.2.0-utm.tar.bz2"
