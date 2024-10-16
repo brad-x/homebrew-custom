@@ -1,0 +1,26 @@
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 27dcda024834..59c626c2de61 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -74,6 +74,7 @@ GlobalProperty hw_compat_7_2[] = {
+     { "virtio-mem", "x-early-migration", "false" },
+     { "migration", "x-preempt-pre-7-2", "true" },
+     { TYPE_PCI_DEVICE, "x-pcie-err-unc-mask", "off" },
++    { "arm-gicv3-its", "itt-entry-size", "12" },
+ };
+ const size_t hw_compat_7_2_len = G_N_ELEMENTS(hw_compat_7_2);
+ 
+diff --git a/hw/intc/arm_gicv3_its.c b/hw/intc/arm_gicv3_its.c
+index bb0addd0974e..76789e5424fb 100644
+--- a/hw/intc/arm_gicv3_its.c
++++ b/hw/intc/arm_gicv3_its.c
+@@ -2011,8 +2011,7 @@ static void gicv3_its_post_load(GICv3ITSState *s)
+ static Property gicv3_its_props[] = {
+     DEFINE_PROP_LINK("parent-gicv3", GICv3ITSState, gicv3, "arm-gicv3",
+                      GICv3State *),
+-    DEFINE_PROP_UINT8("itt-entry-size", GICv3ITSState, itt_entry_size,
+-                      MIN_ITS_ITT_ENTRY_SIZE),
++    DEFINE_PROP_UINT8("itt-entry-size", GICv3ITSState, itt_entry_size, 16),
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 

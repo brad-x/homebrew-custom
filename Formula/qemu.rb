@@ -78,6 +78,16 @@ class Qemu < Formula
     sha256 "0f07c4b1cb0714dd5802cc0ca44e2edea68d87001fc109081bce3a0f9baa766b"
   end
 
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-configurable-itt-size.diff"
+    sha256 "250c55f32a7d7f7b75fe0ee46008f9587434457e173439d1b224c01ec8b0abca"
+  end
+
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-itt-size-bump.diff"
+    sha256 "3302a655612383a20018653872c1e7be0f67819c36783742ffe23e7ca25e7350"
+  end
+
   def install
     ENV["LIBTOOL"] = "glibtool"
 
