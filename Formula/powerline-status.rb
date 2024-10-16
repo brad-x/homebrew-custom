@@ -7,7 +7,7 @@ class PowerlineStatus < Formula
     sha256 "8c7e7da45beb2332bc8226b166b732ef70db2cb0a1f3f0fdc3c539115522ecb6"
     license "MIT"
   
-    depends_on "python@3.13"
+    depends_on "python@3.12"
   
     def install
       virtualenv_install_with_resources
