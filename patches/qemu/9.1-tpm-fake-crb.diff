@@ -1,0 +1,13 @@
+diff --git a/hw/core/sysbus-fdt.c b/hw/core/sysbus-fdt.c
+index 9c783f88eb90..4e4253f736bb 100644
+--- a/hw/core/sysbus-fdt.c
++++ b/hw/core/sysbus-fdt.c
+@@ -493,7 +493,7 @@ static const BindingEntry bindings[] = {
+ #endif
+ #ifdef CONFIG_TPM
+     TYPE_BINDING(TYPE_TPM_TIS_SYSBUS, add_tpm_tis_fdt_node),
+-    TYPE_BINDING(TYPE_TPM_CRB_SYSBUS, no_fdt_node),
++    TYPE_BINDING(TYPE_TPM_CRB_SYSBUS, add_tpm_tis_fdt_node),
+ #endif
+     TYPE_BINDING(TYPE_RAMFB_DEVICE, no_fdt_node),
+     TYPE_BINDING("", NULL), /* last element */

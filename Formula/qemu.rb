@@ -68,10 +68,15 @@ class Qemu < Formula
     sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
   end
 
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/tpm-crb-aarch64.diff"
-  #   sha256 "ee6cae6f36a5d6d4e886eedaa704e522ad83336ef42564a3d856ab77b0439e5d"
-  # end
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-crb-sysbus.diff"
+    sha256 "cc7a76fef895044115c66abd22b2345299acb4a12d16a6c7e68004da994ede86"
+  end
+
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-fake-crb.diff"
+    sha256 "0f07c4b1cb0714dd5802cc0ca44e2edea68d87001fc109081bce3a0f9baa766b"
+  end
 
   def install
     ENV["LIBTOOL"] = "glibtool"
