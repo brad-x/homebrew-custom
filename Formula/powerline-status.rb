@@ -114,7 +114,15 @@ class PowerlineStatus < Formula
       venv = virtualenv_install_with_resources without: "powerline-status"
       venv.pip_install_and_link resource("powerline-status")
     end
+
+    def post_install
+      # Define the file path
+      segments_file = "#{prefix}/libexec/lib/python3.13/site-packages/powerline_kubernetes/segments.py"
   
+      # Use inreplace to remove the specific line
+      inreplace segments_file, /^\s*namespace = ctx\['namespace'\].*$/, ""
+    end
+
     test do
       system "#{bin}/powerline", "--help"
     end
