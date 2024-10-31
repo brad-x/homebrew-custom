@@ -29,10 +29,6 @@ class QemuUtmAT7 < Formula
 
   depends_on "spice-protocol"
   depends_on "brad-x/custom/spice-server"
-  
-  # depends_on "brad-x/custom/libangle"
-  # depends_on "brad-x/custom/libepoxy-angle"
-  # depends_on "brad-x/custom/virglrenderer"
 
   on_linux do
     depends_on "attr"

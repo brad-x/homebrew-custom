@@ -31,10 +31,6 @@ class QemuUtmAT9 < Formula
   depends_on "vde"
   depends_on "zstd"
   depends_on "spice-server"
-  
-  # depends_on "brad-x/custom/libangle"
-  # depends_on "brad-x/custom/libepoxy-angle"
-  # depends_on "brad-x/custom/virglrenderer"
 
   uses_from_macos "bison" => :build
   uses_from_macos "flex" => :build
