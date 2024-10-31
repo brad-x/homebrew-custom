@@ -119,8 +119,14 @@ class PowerlineStatus < Formula
       # Define the file path
       segments_file = "#{prefix}/libexec/lib/python3.13/site-packages/powerline_kubernetes/segments.py"
   
-      # Use inreplace to remove the specific line
-      inreplace segments_file, /^\s*namespace = ctx\['namespace'\].*$/, ""
+      # Read the file content, exclude line 87, and rewrite the file
+      lines = File.readlines(segments_file)
+      File.open(segments_file, "w") do |file|
+        lines.each_with_index do |line, index|
+          # Write all lines except line 87 (index 86) which contains the specific text
+          file.puts(line) unless index == 86 && line.match(/^\s*namespace = ctx\['namespace'\]/)
+        end
+      end
     end
 
     test do
