@@ -110,7 +110,9 @@ class PowerlineStatus < Formula
     end
 
     def install
-      virtualenv_install_with_resources
+      # virtualenv_install_with_resources
+      venv = virtualenv_install_with_resources without: "powerline-status"
+      venv.pip_install_and_link resource("powerline-status")
     end
   
     test do
