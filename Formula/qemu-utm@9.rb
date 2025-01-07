@@ -1,8 +1,8 @@
 class QemuUtmAT9 < Formula
   desc "Emulator for x86 and PowerPC with UTM patchset"
   homepage "https://www.qemu.org/"
-  url "https://github.com/utmapp/qemu/releases/download/v9.1.0-utm/qemu-9.1.0-utm.tar.xz"
-  sha256 "c41753b0350684a2a619175ad43afc5a61634509c7e0ed4bc3c1d5637a090e4c"
+  url "https://github.com/utmapp/qemu/releases/download/v9.1.2-utm/qemu-9.1.2-utm.tar.xz"
+  sha256 "a9c10bea147abaa5781b1f25d0506c62dc5e0ab84b786066b236ef681703d628"
   license "GPL-2.0-only"
   head "https://github.com/utmapp/qemu.git", branch: "utm-edition"
 
@@ -54,8 +54,8 @@ class QemuUtmAT9 < Formula
   fails_with gcc: "5"
 
   patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-9.1.0-utm.diff"
-    sha256 "a47c0d46d8f6f23705626848c8e3e72d627b34aad2ad5540e8a627e6f8cbffa4"
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-9.1.2-utm.diff"
+    sha256 "60451a63c517ee8f01bf68b962341748a171aba19f3a5f8459f3d21f21f7449f"
   end
 
   def install
