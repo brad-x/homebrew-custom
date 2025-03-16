@@ -79,10 +79,10 @@ class Qemu < Formula
   #   sha256 "cc7a76fef895044115c66abd22b2345299acb4a12d16a6c7e68004da994ede86"
   # end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-fake-crb.diff"
-    sha256 "0f07c4b1cb0714dd5802cc0ca44e2edea68d87001fc109081bce3a0f9baa766b"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-fake-crb.diff"
+  #   sha256 "0f07c4b1cb0714dd5802cc0ca44e2edea68d87001fc109081bce3a0f9baa766b"
+  # end
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-configurable-itt-size.diff"
