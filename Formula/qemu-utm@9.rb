@@ -1,21 +1,15 @@
-class Qemu < Formula
-  desc "Generic machine emulator and virtualizer"
+class QemuUtmAT9 < Formula
+  desc "Emulator for x86 and PowerPC with UTM patchset"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-9.2.2.tar.xz"
-  sha256 "752eaeeb772923a73d536b231e05bcc09c9b1f51690a41ad9973d900e4ec9fbf"
+  url "https://github.com/utmapp/qemu/releases/download/v9.1.2-utm/qemu-9.1.2-utm.tar.xz"
+  sha256 "a9c10bea147abaa5781b1f25d0506c62dc5e0ab84b786066b236ef681703d628"
   license "GPL-2.0-only"
-  head "https://gitlab.com/qemu-project/qemu.git", branch: "master"
-
-  livecheck do
-    url "https://www.qemu.org/download/"
-    regex(/href=.*?qemu[._-]v?(\d+(?:\.\d+)+)\.t/i)
-  end
+  head "https://github.com/utmapp/qemu.git", branch: "utm-edition"
 
   depends_on "libtool" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build
-  depends_on "pkgconf" => :build
-  depends_on "python@3.13" => :build # keep aligned with meson
+  depends_on "pkg-config" => :build
   depends_on "spice-protocol" => :build
 
   depends_on "capstone"
@@ -57,57 +51,21 @@ class Qemu < Formula
     depends_on "systemd"
   end
 
-  # 820KB floppy disk image file of FreeDOS 1.2, used to test QEMU
-  # NOTE: Keep outside test block so that `brew fetch` is able to handle slow download/retries
-  resource "homebrew-test-image" do
-    url "https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/official/FD12FLOPPY.zip"
-    sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
-  end
+  fails_with gcc: "5"
 
   patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/windows-hack.diff"
-    sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
-  end
-
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-vmnet-short-frames.diff"
-    sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
-  end
-
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-crb-sysbus.diff"
-    sha256 "cc7a76fef895044115c66abd22b2345299acb4a12d16a6c7e68004da994ede86"
-  end
-
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-fake-crb.diff"
-    sha256 "0f07c4b1cb0714dd5802cc0ca44e2edea68d87001fc109081bce3a0f9baa766b"
-  end
-
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-configurable-itt-size.diff"
-    sha256 "250c55f32a7d7f7b75fe0ee46008f9587434457e173439d1b224c01ec8b0abca"
-  end
-
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-itt-size-bump.diff"
-    sha256 "3302a655612383a20018653872c1e7be0f67819c36783742ffe23e7ca25e7350"
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-9.1.2-utm.diff"
+    sha256 "60451a63c517ee8f01bf68b962341748a171aba19f3a5f8459f3d21f21f7449f"
   end
 
   def install
     ENV["LIBTOOL"] = "glibtool"
-
-    # Remove wheels unless explicitly permitted. Currently this:
-    # * removes `meson` so that brew `meson` is always used
-    # * keeps `pycotap` which is a pure-python "none-any" wheel (allowed in homebrew/core)
-    rm(Dir["python/wheels/*"] - Dir["python/wheels/pycotap-*-none-any.whl"])
 
     args = %W[
       --prefix=#{prefix}
       --cc=#{ENV.cc}
       --host-cc=#{ENV.cc}
       --disable-bsd-user
-      --disable-download
       --disable-guest-agent
       --enable-slirp
       --enable-capstone
@@ -119,6 +77,7 @@ class Qemu < Formula
       --enable-virtfs
       --enable-zstd
       --enable-usb-redir
+      --enable-spice
       --extra-cflags=-DNCURSES_WIDECHAR=1
     ]
 
@@ -140,8 +99,14 @@ class Qemu < Formula
   end
 
   test do
+    # 820KB floppy disk image file of FreeDOS 1.2, used to test QEMU
+    resource "homebrew-test-image" do
+      url "https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/official/FD12FLOPPY.zip"
+      sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
+    end
+
     archs = %w[
-      aarch64 alpha arm avr hppa i386 loongarch64 m68k microblaze microblazeel mips
+      aarch64 alpha arm avr cris hppa i386 loongarch64 m68k microblaze microblazeel mips
       mips64 mips64el mipsel or1k ppc ppc64 riscv32 riscv64 rx
       s390x sh4 sh4eb sparc sparc64 tricore x86_64 xtensa xtensaeb
     ]
