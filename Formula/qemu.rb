@@ -74,10 +74,10 @@ class Qemu < Formula
     sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
   end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-crb-sysbus.diff"
-    sha256 "cc7a76fef895044115c66abd22b2345299acb4a12d16a6c7e68004da994ede86"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-crb-sysbus.diff"
+  #   sha256 "cc7a76fef895044115c66abd22b2345299acb4a12d16a6c7e68004da994ede86"
+  # end
 
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-fake-crb.diff"
