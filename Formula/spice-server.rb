@@ -27,8 +27,6 @@ class SpiceServer < Formula
   depends_on "spice-protocol"
 
   def install
-    system "autoconf"
-    system "automake"
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
