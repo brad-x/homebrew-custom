@@ -69,11 +69,6 @@ class Qemu < Formula
     sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/8.2-vmnet-short-frames.diff"
-    sha256 "c1fd73eaae9035088df4e7ea90e29f30ea7f7f252ef66ae33e4f72f09783ad8e"
-  end
-
   # patch do
   #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-crb-sysbus.diff"
   #   sha256 "cc7a76fef895044115c66abd22b2345299acb4a12d16a6c7e68004da994ede86"
