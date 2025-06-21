@@ -1,8 +1,8 @@
 class Qemu < Formula
   desc "Generic machine emulator and virtualizer"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-9.2.3.tar.xz"
-  sha256 "baed494270c361bf69816acc84512e3efed71c7a23f76691642b80bc3de7693e"
+  url "https://download.qemu.org/qemu-10.0.2.tar.xz"
+  sha256 "ef786f2398cb5184600f69aef4d5d691efd44576a3cff4126d38d4c6fec87759"
   license "GPL-2.0-only"
   head "https://gitlab.com/qemu-project/qemu.git", branch: "master"
 
@@ -34,16 +34,19 @@ class Qemu < Formula
   depends_on "pixman"
   depends_on "sdl2"
   depends_on "snappy"
+  depends_on "spice-server"
   depends_on "vde"
   depends_on "zstd"
-  depends_on "spice-server"
 
   uses_from_macos "bison" => :build
   uses_from_macos "flex" => :build
   uses_from_macos "bzip2"
+  uses_from_macos "curl"
+  uses_from_macos "cyrus-sasl"
   uses_from_macos "zlib"
 
   on_linux do
+    depends_on "alsa-lib"
     depends_on "attr"
     depends_on "cairo"
     depends_on "elfutils"
@@ -54,14 +57,8 @@ class Qemu < Formula
     depends_on "libx11"
     depends_on "libxkbcommon"
     depends_on "mesa"
+    depends_on "pulseaudio"
     depends_on "systemd"
-  end
-
-  # 820KB floppy disk image file of FreeDOS 1.2, used to test QEMU
-  # NOTE: Keep outside test block so that `brew fetch` is able to handle slow download/retries
-  resource "homebrew-test-image" do
-    url "https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/official/FD12FLOPPY.zip"
-    sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
   end
 
   patch do
@@ -140,6 +137,14 @@ class Qemu < Formula
   end
 
   test do
+
+    # 820KB floppy disk image file of FreeDOS 1.2, used to test QEMU
+    # NOTE: Keep outside test block so that `brew fetch` is able to handle slow download/retries
+    resource "homebrew-test-image" do
+      url "https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/official/FD12FLOPPY.zip"
+      sha256 "81237c7b42dc0ffc8b32a2f5734e3480a3f9a470c50c14a9c4576a2561a35807"
+    end
+
     archs = %w[
       aarch64 alpha arm avr hppa i386 loongarch64 m68k microblaze microblazeel mips
       mips64 mips64el mipsel or1k ppc ppc64 riscv32 riscv64 rx
