@@ -60,10 +60,10 @@ class Qemu < Formula
     depends_on "systemd"
   end
 
-  patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/windows-hack.diff"
-    sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
-  end
+  # patch do
+  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/windows-hack.diff"
+  #   sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
+  # end
 
   def install
     ENV["LIBTOOL"] = "glibtool"
