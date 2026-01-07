@@ -1,8 +1,8 @@
 class Qemu < Formula
   desc "Generic machine emulator and virtualizer"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-10.0.2.tar.xz"
-  sha256 "ef786f2398cb5184600f69aef4d5d691efd44576a3cff4126d38d4c6fec87759"
+  url "https://download.qemu.org/qemu-10.2.0.tar.xz"
+  sha256 "9e30ad1b8b9f7b4463001582d1ab297f39cfccea5d08540c0ca6d6672785883a"
   license "GPL-2.0-only"
   head "https://gitlab.com/qemu-project/qemu.git", branch: "master"
 
@@ -15,7 +15,7 @@ class Qemu < Formula
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
-  depends_on "python@3.13" => :build # keep aligned with meson
+  depends_on "python@3.14" => :build # keep aligned with meson
   depends_on "spice-protocol" => :build
 
   depends_on "capstone"
@@ -46,18 +46,17 @@ class Qemu < Formula
   uses_from_macos "zlib"
 
   on_linux do
-    depends_on "alsa-lib"
     depends_on "attr"
     depends_on "cairo"
     depends_on "elfutils"
     depends_on "gdk-pixbuf"
     depends_on "gtk+3"
+    depends_on "keyutils"
     depends_on "libcap-ng"
     depends_on "libepoxy"
     depends_on "libx11"
     depends_on "libxkbcommon"
     depends_on "mesa"
-    depends_on "pulseaudio"
     depends_on "systemd"
   end
 
@@ -65,26 +64,6 @@ class Qemu < Formula
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/windows-hack.diff"
     sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   end
-
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-crb-sysbus.diff"
-  #   sha256 "cc7a76fef895044115c66abd22b2345299acb4a12d16a6c7e68004da994ede86"
-  # end
-
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-tpm-fake-crb.diff"
-  #   sha256 "0f07c4b1cb0714dd5802cc0ca44e2edea68d87001fc109081bce3a0f9baa766b"
-  # end
-
-  #patch do
-  #  url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-configurable-itt-size.diff"
-  #  sha256 "250c55f32a7d7f7b75fe0ee46008f9587434457e173439d1b224c01ec8b0abca"
-  #end
-
-  #patch do
-  #  url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/9.1-itt-size-bump.diff"
-  #  sha256 "3302a655612383a20018653872c1e7be0f67819c36783742ffe23e7ca25e7350"
-  #end
 
   def install
     ENV["LIBTOOL"] = "glibtool"
