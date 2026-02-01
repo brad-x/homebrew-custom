@@ -28,7 +28,7 @@ class QemuUtmAT7 < Formula
   depends_on "zstd"
 
   depends_on "spice-protocol"
-  depends_on "brad-x/custom/spice-server"
+  depends_on "spice-server"
 
   on_linux do
     depends_on "attr"

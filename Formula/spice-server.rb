@@ -3,7 +3,7 @@
 class SpiceServer < Formula
   desc "Remote virtual machine display server"
   homepage "https://www.spice-space.org/"
-  url "https://www.spice-space.org/download/releases/spice-server/spice-0.15.2.tar.bz2"
+  url "https://www.spice-space.org/download/releases/spice-server/spice-0.16.0.tar.bz2"
   sha256 "6d9eb6117f03917471c4bc10004abecff48a79fb85eb85a1c45f023377015b81"
   license "BSD"
 
