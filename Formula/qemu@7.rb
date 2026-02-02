@@ -65,7 +65,7 @@ class QemuAT7 < Formula
   #   sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   # end
 
-  patch do
+  patch :p0 do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu@7/qemu-7.2.cocoa.diff"
     sha256 "2ba30e9363bb368f0bcebbfb88b70bb76053ae0e8446e1c3f2d1d70f1c0f16b3"
   end
