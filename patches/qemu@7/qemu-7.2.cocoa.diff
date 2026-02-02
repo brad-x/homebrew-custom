@@ -1,9 +1,9 @@
---- ui/cocoa.m.orig	2025-12-06 08:17:13.000000000 -0500
-+++ ui/cocoa.m	2026-02-01 21:30:00.000000000 -0500
-@@ -90,6 +90,27 @@
- static void cocoa_refresh(DisplayChangeListener *dcl);
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -113,6 +113,26 @@ static QemuClipboardInfo *cbinfo;
+ static QemuEvent cbevent;
  
- static NSWindow *normalWindow;
+ // Utility functions to run specified code block with iothread lock held
 +
 +/*
 + * Utility function to run a block on the main thread synchronously.
@@ -27,15 +27,12 @@
 +    }
 +}
 +
- static const DisplayChangeListenerOps dcl_ops = {
-     .dpy_name          = "cocoa",
-     .dpy_gfx_update = cocoa_update,
-@@ -652,17 +673,23 @@
+ typedef void (^CodeBlock)(void);
+ typedef bool (^BoolCodeBlock)(void);
  
-     pixman_image = image;
+@@ -631,17 +651,23 @@ - (void) switchSurface:(pixman_image_t *)image
  
--    // update windows
-+    // update windows - must happen on main thread
+     // update windows
      if (isFullscreen) {
 -        [[fullScreenWindow contentView] setFrame:[[NSScreen mainScreen] frame]];
 -        [normalWindow setFrame:NSMakeRect([normalWindow frame].origin.x, [normalWindow frame].origin.y - h + oldh, w, h + [normalWindow frame].size.height - oldh) display:NO animate:NO];
@@ -62,7 +59,7 @@
      }
  }
  
-@@ -670,30 +697,32 @@
+@@ -649,30 +675,32 @@ - (void) toggleFullScreen:(id)sender
  {
      COCOA_DEBUG("QemuCocoaView: toggleFullScreen\n");
  
@@ -121,7 +118,7 @@
  }
  
  - (void) setFullGrab:(id)sender
-@@ -1937,7 +1966,7 @@
+@@ -1816,7 +1844,7 @@ static void *call_qemu_main(void *opaque)
      exit(status);
  }
  
