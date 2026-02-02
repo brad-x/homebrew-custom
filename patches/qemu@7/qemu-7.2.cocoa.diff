@@ -1,0 +1,125 @@
+--- ui/cocoa.m	2025-12-06 08:17:13.000000000 -0500
++++ ../../qemu-7.2.22/ui/cocoa.m	2026-02-01 20:39:33.795235793 -0500
+@@ -90,6 +90,22 @@
+ static void cocoa_refresh(DisplayChangeListener *dcl);
+ 
+ static NSWindow *normalWindow;
++
++/*
++ * Utility function to run a block on the main thread synchronously.
++ * This is required because macOS requires all NSWindow/NSView
++ * geometry operations to occur on the main thread. Modern macOS
++ * versions (Ventura, Sonoma) strictly enforce this requirement.
++ */
++static void run_on_main_thread_sync(dispatch_block_t block)
++{
++    if ([NSThread isMainThread]) {
++        block();
++    } else {
++        dispatch_sync(dispatch_get_main_queue(), block);
++    }
++}
++
+ static const DisplayChangeListenerOps dcl_ops = {
+     .dpy_name          = "cocoa",
+     .dpy_gfx_update = cocoa_update,
+@@ -652,18 +668,24 @@
+ 
+     pixman_image = image;
+ 
+-    // update windows
++    // update windows - must happen on main thread
+     if (isFullscreen) {
+-        [[fullScreenWindow contentView] setFrame:[[NSScreen mainScreen] frame]];
+-        [normalWindow setFrame:NSMakeRect([normalWindow frame].origin.x, [normalWindow frame].origin.y - h + oldh, w, h + [normalWindow frame].size.height - oldh) display:NO animate:NO];
++        run_on_main_thread_sync(^{
++            [[fullScreenWindow contentView] setFrame:[[NSScreen mainScreen] frame]];
++            [normalWindow setFrame:NSMakeRect([normalWindow frame].origin.x, [normalWindow frame].origin.y - h + oldh, w, h + [normalWindow frame].size.height - oldh) display:NO animate:NO];
++        });
+     } else {
+-        if (qemu_name)
+-            [normalWindow setTitle:[NSString stringWithFormat:@"QEMU %s", qemu_name]];
+-        [normalWindow setFrame:NSMakeRect([normalWindow frame].origin.x, [normalWindow frame].origin.y - h + oldh, w, h + [normalWindow frame].size.height - oldh) display:YES animate:NO];
++        run_on_main_thread_sync(^{
++            if (qemu_name)
++                [normalWindow setTitle:[NSString stringWithFormat:@"QEMU %s", qemu_name]];
++            [normalWindow setFrame:NSMakeRect([normalWindow frame].origin.x, [normalWindow frame].origin.y - h + oldh, w, h + [normalWindow frame].size.height - oldh) display:YES animate:NO];
++        });
+     }
+ 
+     if (isResize) {
+-        [normalWindow center];
++        run_on_main_thread_sync(^{
++            [normalWindow center];
++        });
+     }
+ }
+ 
+@@ -671,31 +693,33 @@
+ {
+     COCOA_DEBUG("QemuCocoaView: toggleFullScreen\n");
+ 
+-    if (isFullscreen) { // switch from fullscreen to desktop
+-        isFullscreen = FALSE;
+-        [self ungrabMouse];
+-        [self setContentDimensions];
+-        [fullScreenWindow close];
+-        [normalWindow setContentView: self];
+-        [normalWindow makeKeyAndOrderFront: self];
+-        [NSMenu setMenuBarVisible:YES];
+-    } else { // switch from desktop to fullscreen
+-        isFullscreen = TRUE;
+-        [normalWindow orderOut: nil]; /* Hide the window */
+-        [self grabMouse];
+-        [self setContentDimensions];
+-        [NSMenu setMenuBarVisible:NO];
+-        fullScreenWindow = [[NSWindow alloc] initWithContentRect:[[NSScreen mainScreen] frame]
+-            styleMask:NSWindowStyleMaskBorderless
+-            backing:NSBackingStoreBuffered
+-            defer:NO];
+-        [fullScreenWindow setAcceptsMouseMovedEvents: YES];
+-        [fullScreenWindow setHasShadow:NO];
+-        [fullScreenWindow setBackgroundColor: [NSColor blackColor]];
+-        [self setFrame:NSMakeRect(cx, cy, cw, ch)];
+-        [[fullScreenWindow contentView] addSubview: self];
+-        [fullScreenWindow makeKeyAndOrderFront:self];
+-    }
++    run_on_main_thread_sync(^{
++        if (isFullscreen) { // switch from fullscreen to desktop
++            isFullscreen = FALSE;
++            [self ungrabMouse];
++            [self setContentDimensions];
++            [fullScreenWindow close];
++            [normalWindow setContentView: self];
++            [normalWindow makeKeyAndOrderFront: self];
++            [NSMenu setMenuBarVisible:YES];
++        } else { // switch from desktop to fullscreen
++            isFullscreen = TRUE;
++            [normalWindow orderOut: nil]; /* Hide the window */
++            [self grabMouse];
++            [self setContentDimensions];
++            [NSMenu setMenuBarVisible:NO];
++            fullScreenWindow = [[NSWindow alloc] initWithContentRect:[[NSScreen mainScreen] frame]
++                styleMask:NSWindowStyleMaskBorderless
++                backing:NSBackingStoreBuffered
++                defer:NO];
++            [fullScreenWindow setAcceptsMouseMovedEvents: YES];
++            [fullScreenWindow setHasShadow:NO];
++            [fullScreenWindow setBackgroundColor: [NSColor blackColor]];
++            [self setFrame:NSMakeRect(cx, cy, cw, ch)];
++            [[fullScreenWindow contentView] addSubview: self];
++            [fullScreenWindow makeKeyAndOrderFront:self];
++        }
++    });
+ }
+ 
+ - (void) setFullGrab:(id)sender
+@@ -1938,7 +1962,7 @@
+     exit(status);
+ }
+ 
+-static int cocoa_main()
++static int cocoa_main(void)
+ {
+     QemuThread thread;
+ 
