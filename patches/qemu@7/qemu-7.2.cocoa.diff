@@ -1,6 +1,6 @@
---- ui/cocoa.m	2025-12-06 08:17:13.000000000 -0500
-+++ ../../qemu-7.2.22/ui/cocoa.m	2026-02-01 21:30:00.000000000 -0500
-@@ -90,6 +90,28 @@
+--- ui/cocoa.m.orig	2025-12-06 08:17:13.000000000 -0500
++++ ui/cocoa.m	2026-02-01 21:30:00.000000000 -0500
+@@ -90,6 +90,27 @@
  static void cocoa_refresh(DisplayChangeListener *dcl);
  
  static NSWindow *normalWindow;
@@ -30,7 +30,7 @@
  static const DisplayChangeListenerOps dcl_ops = {
      .dpy_name          = "cocoa",
      .dpy_gfx_update = cocoa_update,
-@@ -652,18 +674,24 @@
+@@ -652,17 +673,23 @@
  
      pixman_image = image;
  
@@ -62,7 +62,7 @@
      }
  }
  
-@@ -671,31 +699,33 @@
+@@ -670,30 +697,32 @@
  {
      COCOA_DEBUG("QemuCocoaView: toggleFullScreen\n");
  
@@ -121,7 +121,7 @@
  }
  
  - (void) setFullGrab:(id)sender
-@@ -1938,7 +1968,7 @@
+@@ -1937,7 +1966,7 @@
      exit(status);
  }
  
