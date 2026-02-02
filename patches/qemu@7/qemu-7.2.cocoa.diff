@@ -1,6 +1,6 @@
 --- ui/cocoa.m	2025-12-06 08:17:13.000000000 -0500
-+++ ../../qemu-7.2.22/ui/cocoa.m	2026-02-01 20:39:33.795235793 -0500
-@@ -90,6 +90,22 @@
++++ ../../qemu-7.2.22/ui/cocoa.m	2026-02-01 21:30:00.000000000 -0500
+@@ -90,6 +90,28 @@
  static void cocoa_refresh(DisplayChangeListener *dcl);
  
  static NSWindow *normalWindow;
@@ -9,21 +9,28 @@
 + * Utility function to run a block on the main thread synchronously.
 + * This is required because macOS requires all NSWindow/NSView
 + * geometry operations to occur on the main thread. Modern macOS
-+ * versions (Ventura, Sonoma) strictly enforce this requirement.
++ * versions (Ventura, Sonoma, Sequoia) strictly enforce this requirement.
++ *
++ * IMPORTANT: We must release the BQL (Big QEMU Lock) before dispatching
++ * to the main thread, because the main thread's event handler may need
++ * to acquire the BQL. Holding BQL while doing dispatch_sync to main
++ * thread causes deadlock.
 + */
 +static void run_on_main_thread_sync(dispatch_block_t block)
 +{
 +    if ([NSThread isMainThread]) {
 +        block();
 +    } else {
++        qemu_mutex_unlock_iothread();
 +        dispatch_sync(dispatch_get_main_queue(), block);
++        qemu_mutex_lock_iothread();
 +    }
 +}
 +
  static const DisplayChangeListenerOps dcl_ops = {
      .dpy_name          = "cocoa",
      .dpy_gfx_update = cocoa_update,
-@@ -652,18 +668,24 @@
+@@ -652,18 +674,24 @@
  
      pixman_image = image;
  
@@ -55,7 +62,7 @@
      }
  }
  
-@@ -671,31 +693,33 @@
+@@ -671,31 +699,33 @@
  {
      COCOA_DEBUG("QemuCocoaView: toggleFullScreen\n");
  
@@ -114,7 +121,7 @@
  }
  
  - (void) setFullGrab:(id)sender
-@@ -1938,7 +1962,7 @@
+@@ -1938,7 +1968,7 @@
      exit(status);
  }
  
@@ -122,4 +129,3 @@
 +static int cocoa_main(void)
  {
      QemuThread thread;
- 
