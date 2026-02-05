@@ -77,7 +77,7 @@ class QemuUtmAT7 < Formula
     args << "--smbd=#{HOMEBREW_PREFIX}/sbin/samba-dot-org-smbd"
 
     args += if OS.mac?
-      ["--disable-gtk", "--enable-cocoa", "--enable-sdl"]
+      ["--disable-gtk", "--disable-cocoa", "--enable-sdl"]
     else
       ["--enable-gtk"]
     end
