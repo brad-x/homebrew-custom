@@ -68,6 +68,7 @@ class Qemu < Formula
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu/10.2.1-sipi-revert.diff"
     sha256 "29edcc7059bd5a22cb99ac0d3b30e018c3885e58779cb7fdab03b5f488f5d235"
+  end
 
   def install
     ENV["LIBTOOL"] = "glibtool"
