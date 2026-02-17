@@ -65,10 +65,10 @@ class QemuAT7 < Formula
   #   sha256 "b65143e363291de1ac194c639c8fab1f50f8533b065b6bdf71a16d78f5e4c834"
   # end
 
-  # patch do
-  #   url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu@7/qemu-7.2.cocoa.diff"
-  #   sha256 "38590d72374f7b35dfeb7aceb244f384bc5ceda0a59a048930d9df0f87a304a0"
-  # end
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu@7/qemu-7.2.22-sipi-revert.diff"
+    sha256 "04a1c774bf2dcb93f279f0ebfce1360e231afcad41612b7a55c172facf678f92"
+  end
 
   def install
     ENV["LIBTOOL"] = "glibtool"

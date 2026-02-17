@@ -1,0 +1,46 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Brad Laue <brad@brad-x.com>
+Date: Tue, 17 Feb 2026 00:00:00 +0000
+Subject: [PATCH] hw/intc/apic: Restore cpu_reset_interrupt for SIPI in
+ apic_sipi()
+
+Commit f4ede985eb ("i386/cpu: Prevent delivering SIPI during SMM in TCG
+mode"), cherry-picked from df32e5c568, moved the clearing of
+CPU_INTERRUPT_SIPI out of the shared apic_sipi() and into the TCG-only
+x86_cpu_exec_interrupt() path in seg_helper.c.
+
+This breaks HVF on x86_64 (Intel Macs), which has its own vCPU run loop
+in target/i386/hvf/hvf.c and does not dispatch interrupts through
+x86_cpu_exec_interrupt(). After the original commit, CPU_INTERRUPT_SIPI
+is never cleared under HVF, causing repeated SIPI delivery and boot
+failures on SMP guests.
+
+Restore the cpu_reset_interrupt() call in the shared apic_sipi() so that
+all accelerators (TCG, KVM, HVF) correctly clear the pending SIPI. The
+TCG path will now clear it redundantly (once in seg_helper.c, once here),
+which is harmless.
+
+The other two hunks from the original commit — the SMM guard in
+do_cpu_sipi() and the TCG-side clearing — are correct and left intact.
+
+Fixes: f4ede985eb ("i386/cpu: Prevent delivering SIPI during SMM in TCG mode")
+Signed-off-by: You <you@example.com>
+---
+ hw/intc/apic.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/hw/intc/apic.c b/hw/intc/apic.c
+index XXXXXXX..XXXXXXX 100644
+--- a/hw/intc/apic.c
++++ b/hw/intc/apic.c
+@@ -499,6 +499,8 @@ void apic_sipi(DeviceState *dev)
+ {
+     APICCommonState *s = APIC(dev);
+ 
++    cpu_reset_interrupt(CPU(s->cpu), CPU_INTERRUPT_SIPI);
++
+     if (!s->wait_for_sipi)
+         return;
+     cpu_x86_load_seg_cache_sipi(s->cpu, s->sipi_vector);
+-- 
+2.39.0
