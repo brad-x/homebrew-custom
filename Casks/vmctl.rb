@@ -17,8 +17,6 @@ cask "vmctl" do
     system_command "/usr/bin/codesign",
       args: ["--force", "--sign", "-", "#{appdir}/vmctl.app/Contents/MacOS/vmctl-cli"]
     system_command "/usr/bin/codesign",
-      args: ["--force", "--sign", "-", "#{appdir}/vmctl.app/Contents/MacOS/vmctl"]
-    system_command "/usr/bin/codesign",
       args: ["--force", "--sign", "-", "#{appdir}/vmctl.app"]
   end
   caveats <<~EOS
