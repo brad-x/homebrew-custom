@@ -1,6 +1,6 @@
 cask "vmctl" do
-  version "0.1.1"
-  sha256 "8a25bac6b7ad720fdab95446484cfca98ff3d1cf88cf8d1573bff2d10f908d5f"
+  version "0.1.2"
+  sha256 "1e53b6ba9dabe16ba486be78d0ce5eda78ee08c60087ee3bd19e6a36d21f0dd4"
 
   url "https://git.brad-x.com/brad/vmctl/releases/download/v#{version}/vmctl-#{version}.zip"
   name "vmctl"
