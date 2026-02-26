@@ -1,6 +1,6 @@
 cask "vmctl" do
   version "0.1.0"
-  sha256 "366e3d1315de97bd99ad68e3134fb7d246400b408af8d93b4a382512605bd579"
+  sha256 "REPLACE_WITH_SHA256"
 
   url "https://git.brad-x.com/brad/vmctl/releases/download/v#{version}/vmctl-#{version}.zip"
   name "vmctl"
@@ -13,6 +13,11 @@ cask "vmctl" do
   app "vmctl.app"
   binary "vmctl.app/Contents/MacOS/vmctl-cli", target: "vmctl"
 
+  postflight do
+    system_command "/usr/bin/codesign",
+      args: ["--force", "--deep", "--sign", "-", "#{appdir}/vmctl.app"],
+      sudo: false
+  end
   caveats <<~EOS
     Both vfkit and vmnet-helper must be installed:
       brew install vfkit vmnet-helper
