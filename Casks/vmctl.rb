@@ -14,10 +14,12 @@ cask "vmctl" do
   binary "vmctl.app/Contents/MacOS/vmctl-cli", target: "vmctl"
 
   postflight do
+    system_command "/usr/bin/xattr",
+        args: ["-dr", "com.apple.quarantine", "#{appdir}/vmctl.app"]
     system_command "/usr/bin/codesign",
-      args: ["--force", "--sign", "-", "#{appdir}/vmctl.app/Contents/MacOS/vmctl-cli"]
+        args: ["--force", "--sign", "-", "#{appdir}/vmctl.app/Contents/MacOS/vmctl-cli"]
     system_command "/usr/bin/codesign",
-      args: ["--force", "--sign", "-", "#{appdir}/vmctl.app"]
+        args: ["--force", "--sign", "-", "#{appdir}/vmctl.app"]
   end
   caveats <<~EOS
     Both vfkit and vmnet-helper must be installed:
