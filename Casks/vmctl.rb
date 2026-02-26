@@ -8,7 +8,7 @@ cask "vmctl" do
   homepage "https://git.brad-x.com/brad/vmctl"
 
   depends_on formula: "vfkit"
-  depends_on formula: "vmnet-helper"
+  depends_on formula: "nirs/vmnet-helper"
 
   app "vmctl.app"
   binary "vmctl.app/Contents/MacOS/vmctl-cli", target: "vmctl"
