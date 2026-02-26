@@ -23,14 +23,26 @@ class Vmctl < Formula
     end
 
     # Build vmctl.app
-    xcodebuild_args = %w[
-      -project vmctl.xcodeproj
+    # Resolve SPM packages outside sandbox, then build
+    spm_cache = buildpath/".spm-packages"
+    xcodebuild_args = %W[
+      -project #{buildpath}/vmctl.xcodeproj
       -scheme vmctl
       -configuration Release
       clean build
       CODE_SIGN_IDENTITY=-
       SYMROOT=build
+      -clonedSourcePackagesDirPath #{spm_cache}
+      -skipPackagePluginValidation
+      -disableAutomaticPackageResolution
     ]
+
+    # Pre-resolve packages first
+    system "xcodebuild", "-resolvePackageDependencies",
+      "-project", "#{buildpath}/vmctl.xcodeproj",
+      "-clonedSourcePackagesDirPath", spm_cache.to_s,
+      "-skipPackagePluginValidation"
+
     system "xcodebuild", *xcodebuild_args
     prefix.install "build/Release/vmctl.app"
   end
