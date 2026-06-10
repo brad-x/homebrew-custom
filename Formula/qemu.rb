@@ -1,9 +1,10 @@
 class Qemu < Formula
   desc "Generic machine emulator and virtualizer"
   homepage "https://www.qemu.org/"
-  url "https://download.qemu.org/qemu-10.2.1.tar.xz"
-  sha256 "a3717477d8e2c84d630bfffbc20f6cd3293eb45aa1e6dac6d0cc27689991c9e1"
+  url "https://download.qemu.org/qemu-11.0.1.tar.xz"
+  sha256 "0d235f5820278d914a3155ec27af8e4258d697ea892895570807d69c0cb8cd64"
   license "GPL-2.0-only"
+  compatibility_version 1
   head "https://gitlab.com/qemu-project/qemu.git", branch: "master"
 
   livecheck do
@@ -15,6 +16,7 @@ class Qemu < Formula
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
+  depends_on "python-setuptools" => :build
   depends_on "python@3.14" => :build # keep aligned with meson
   depends_on "spice-protocol" => :build
 
@@ -41,9 +43,6 @@ class Qemu < Formula
   uses_from_macos "bison" => :build
   uses_from_macos "flex" => :build
   uses_from_macos "bzip2"
-  uses_from_macos "curl"
-  uses_from_macos "cyrus-sasl"
-  uses_from_macos "zlib"
 
   on_linux do
     depends_on "attr"
@@ -58,6 +57,7 @@ class Qemu < Formula
     depends_on "libxkbcommon"
     depends_on "mesa"
     depends_on "systemd"
+    depends_on "zlib-ng-compat"
   end
 
   # patch do
@@ -75,8 +75,8 @@ class Qemu < Formula
 
     # Remove wheels unless explicitly permitted. Currently this:
     # * removes `meson` so that brew `meson` is always used
-    # * keeps `pycotap` which is a pure-python "none-any" wheel (allowed in homebrew/core)
-    rm(Dir["python/wheels/*"] - Dir["python/wheels/pycotap-*-none-any.whl"])
+    # * keeps `pycotap` and `qemu_qmp` which are pure-python "none-any" wheels (allowed in homebrew/core)
+    rm(Dir["python/wheels/*"] - Dir["python/wheels/{pycotap,qemu_qmp}-*-none-any.whl"])
 
     args = %W[
       --prefix=#{prefix}
@@ -125,7 +125,7 @@ class Qemu < Formula
     end
 
     archs = %w[
-      aarch64 alpha arm avr hppa i386 loongarch64 m68k microblaze microblazeel mips
+      aarch64 alpha arm avr hppa i386 loongarch64 m68k microblaze mips
       mips64 mips64el mipsel or1k ppc ppc64 riscv32 riscv64 rx
       s390x sh4 sh4eb sparc sparc64 tricore x86_64 xtensa xtensaeb
     ]
