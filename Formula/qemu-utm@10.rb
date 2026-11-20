@@ -53,6 +53,12 @@ class QemuUtmAT10 < Formula
 
   fails_with gcc: "5"
 
+  # patches/qemu-10.0.12-utm.patch from UTM (v5.0.8), applied on top of the release tarball
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-10.0.12-utm.diff"
+    sha256 "46c457b8865833f56ffe3ebcf525a6820e32b594c6859d97207b230a4d08424f"
+  end
+
   # UTM's Metal SPICE display needs OpenGL (libepoxy), which this build doesn't use
   patch do
     url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-10.0.12-metal-requires-opengl.diff"
