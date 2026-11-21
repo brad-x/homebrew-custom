@@ -1,8 +1,8 @@
-class QemuUtmAT9 < Formula
+class QemuUtmAT10 < Formula
   desc "Emulator for x86 and PowerPC with UTM patchset"
   homepage "https://www.qemu.org/"
-  url "https://github.com/utmapp/qemu/releases/download/v9.1.2-utm/qemu-9.1.2-utm.tar.xz"
-  sha256 "a9c10bea147abaa5781b1f25d0506c62dc5e0ab84b786066b236ef681703d628"
+  url "https://github.com/utmapp/qemu/releases/download/v10.0.12-utm/qemu-10.0.12-utm.tar.xz"
+  sha256 "7c9605290b34152debb842e965a55d2e4fbba4793e536ab677b4027e5dc0ba1a"
   license "GPL-2.0-only"
   head "https://github.com/utmapp/qemu.git", branch: "utm-edition"
 
@@ -53,9 +53,16 @@ class QemuUtmAT9 < Formula
 
   fails_with gcc: "5"
 
+  # patches/qemu-10.0.12-utm.patch from UTM (v5.0.8), applied on top of the release tarball
   patch do
-    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-9.1.2-utm.diff"
-    sha256 "60451a63c517ee8f01bf68b962341748a171aba19f3a5f8459f3d21f21f7449f"
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-10.0.12-utm.diff"
+    sha256 "46c457b8865833f56ffe3ebcf525a6820e32b594c6859d97207b230a4d08424f"
+  end
+
+  # UTM's Metal SPICE display needs OpenGL (libepoxy), which this build doesn't use
+  patch do
+    url "https://github.com/brad-x/homebrew-custom/raw/main/patches/qemu-utm/qemu-10.0.12-metal-requires-opengl.diff"
+    sha256 "f3e7aadddae5a671bfa47a4d5455bf3af9b60457e5020e4b24d58e272ad33395"
   end
 
   def install
@@ -77,7 +84,6 @@ class QemuUtmAT9 < Formula
       --enable-virtfs
       --enable-zstd
       --enable-usb-redir
-      --enable-spice
       --extra-cflags=-DNCURSES_WIDECHAR=1
     ]
 
@@ -89,10 +95,15 @@ class QemuUtmAT9 < Formula
     args << "--smbd=#{HOMEBREW_PREFIX}/sbin/samba-dot-org-smbd"
 
     args += if OS.mac?
-      ["--disable-gtk", "--enable-cocoa", "--enable-sdl"]
+      # libepoxy (pulled in via spice-server) has no EGL on macOS, but UTM's
+      # display code assumes EGL whenever OpenGL is enabled
+      ["--disable-gtk", "--enable-cocoa", "--enable-sdl", "--disable-opengl"]
     else
       ["--enable-gtk"]
     end
+
+    # hw/display/apple-gfx.m: error: 'PGTask_t' is unavailable: obsoleted in macOS 27.0
+    args << "--disable-pvg" if OS.mac? && MacOS.version >= :golden_gate
 
     system "./configure", *args
     system "make", "V=1", "install"
@@ -106,7 +117,7 @@ class QemuUtmAT9 < Formula
     end
 
     archs = %w[
-      aarch64 alpha arm avr cris hppa i386 loongarch64 m68k microblaze microblazeel mips
+      aarch64 alpha arm avr hppa i386 loongarch64 m68k microblaze microblazeel mips
       mips64 mips64el mipsel or1k ppc ppc64 riscv32 riscv64 rx
       s390x sh4 sh4eb sparc sparc64 tricore x86_64 xtensa xtensaeb
     ]
